@@ -1,0 +1,123 @@
+.uploader{
+    display: flex;
+}
+
+.uploader__container{
+    flex: 0.5;
+    width: 100%;
+    border-left: 1px solid var(--trekkers-secondary);
+    border-right: 1px solid var(--trekkers-secondary);
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
+
+.uploader__label-list{
+    display: flex;
+}
+
+.uplouder__label-content{
+    padding: 15px;
+    width: 40%;
+}
+
+.uploader__label{
+    padding:  10px 15px;
+    border-radius: 33px;
+    background-color: var(--grey-2);
+    color: var(--white);
+    text-transform: capitalize ;
+    font-size: 1.1rem ;
+    border: none;
+    text-align: center;
+    margin: 30px;
+}
+
+.uploader__select{
+    padding: 15px;
+    width: 45%;
+    border: none;
+}
+
+.uploader__select-content{
+    width: 85%;
+    border: none;
+    text-transform: capitalize ;
+    font-size: 1.1rem ;
+    text-align: center;
+    border: none;
+    padding:  10px 40px;
+    border-radius: 15px;
+    background-color: var(--white);
+    cursor: pointer;
+    margin: 30px;
+}
+
+.uploader__select-content:hover{
+    background-color: var(--grey-2);
+    color: var(--white);
+    border: none;
+}
+
+.uploader__select-option{
+    border: none;
+}
+
+.uploader__select-option:hover{
+    border: none;
+    background-color: var(--grey-2);
+    color: var(--white);
+}
+
+.uploader__zone-content{
+    height: 30vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.uploader__zone{
+    height: 100%;
+    width: 70%;
+}
+
+.uploader__form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px dashed;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 7px;
+    background-color: var(--white);
+}
+
+.uplouder__Btn-content{
+    display: flex;
+    margin-bottom: 5%;
+    margin-left: 50%;
+    margin-top: 10%;
+}
+
+.uploader__Btn{
+    padding:  10px 15px;
+    border-radius: 33px;
+    cursor: pointer;
+    background-color: var(--trekkers-primary);
+    color: var(--white);
+    text-transform: capitalize ;
+    font-size: 1.1rem ;
+    border: none;
+    text-align: center;
+    margin-left: 3%;
+}
+
+.uploader__Btn:hover{
+    background-color: var(--trekkers-primary-2)
+}
+
+.uploader__Btn span{
+    margin-left: 5px;
+}

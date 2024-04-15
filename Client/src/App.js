@@ -9,7 +9,7 @@ import SearchBar from "./Components/Search/SearchBar";
 import PeopleSearch from "./Components/peopleSearch/PeopleSearch";
 import CountrySearch from "./Components/CountrySearch/CountrySearch";
 import PostSearch from "./Components/PostSearch/PostSearch";
-
+import Uploader from "./Components/Uploader/Uploader";
 
 function App() {
   return (
@@ -25,6 +25,7 @@ function App() {
           <Route path="/CountrySearch" element={<CountrySearch />}></Route>
           <Route path="/PostSearch" element={<PostSearch />}></Route>
           <Route path="/peopleSearch" element={<PeopleSearch />}></Route>
+          <Route path="/uploader" element={<Uploader />}></Route>
         </Routes>
       </div>
     </BrowserRouter>
