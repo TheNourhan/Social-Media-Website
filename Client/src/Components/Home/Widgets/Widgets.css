@@ -8,8 +8,42 @@
     width: 100%;
 }
 
+.suggestFriend {
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    cursor: pointer;
+    margin: 2px;
+    width: 75%;
+    padding: 10px;
+    border-radius: 10px;
+    margin-left: 20px;
+    box-shadow: 0 0 10px rgba(14, 7, 7, 0.1);
+
+
+}
+
+.suggestFriend:hover {
+    background-color: rgb(231, 231, 231);
+}
+
+.suggestImgContainer {
+    position: relative;
+    margin-right: 0px;
+}
+
+.suggestImg {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid black;
+    margin-left: 0%;
+
+}
+
 .widgets button {
-    margin-left: auto;
+    margin-left: 0px;
     cursor: pointer;
     background-color: var(--trekkers-primary) !important;
     color: var(--white) !important;
@@ -25,7 +59,59 @@
     background-color: var(--trekkers-primary-2) !important;
 }
 
-.users__link{
-    text-decoration: none;
-    color: black;
+.name .handel {
+    color: rgb(113, 113, 111);
+    font-size: 0.8rem;
+    margin-left: 0%;
+}
+
+.name .suggestName {
+    font-size: 0.9rem;
+    margin-left: 5px;
+
+
+}
+
+.suggest {
+
+    display: flex;
+    flex-direction: column;
+    background-color: var(--grey-1);
+    width: auto;
+    padding-right: 0%;
+    width: 30%;
+    border-radius: 10px;
+    float: right;
+    flex: 0.4;
+
+
+
+}
+
+.name {
+    margin: 0;
+    margin-right: 40px;
+}
+
+.FriendSugg {
+    background-color: brown;
+
+
+    display: flex;
+    align-items: end;
+
+}
+
+.title {
+    border-bottom: 5px;
+    font-size: 1.2rem;
+
+    font-weight: bold;
+    margin-bottom: 30px;
+
+    margin-top: 30px;
+    margin-left: 20px;
+
+
+
 }

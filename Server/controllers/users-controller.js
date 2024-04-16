@@ -280,75 +280,11 @@ const get_followers = (async(req, res, next) => {
     }
 });
 
-const get_all_users = (async(req, res, next) => {
-    try {
-        const currentUser = req.user;
-        const users = await User.find({}, {
-            password: 0,
-            followers: 0,
-            following: 0,
-            email: 0,
-            createdAt: 0,
-            updatedAt: 0,
-            __v: 0
-        });
-        if(!users){
-            const error = 'Users not found';
-            return next(error);
-        }
-        const formatted_users = users.map(user => ({
-            id: user._id,
-            name: user.firstName + " " + user.lastName,
-            handle: user.username,
-            avatar: user.profilePic,
-            bio: user.bio,
-        }));
-        const data = [];
-        for (let i = 0; i < formatted_users.length; i++) {
-            if (formatted_users[i].id.toString() !== currentUser._id.toString() &&
-                !currentUser.following.includes(formatted_users[i].id.toString())) {
-                data.push(formatted_users[i]);
-            }
-        }
-        let random_users;
-        if(data.length < 4){
-            random_users = select_random_elements(data, data.length);
-        }else{
-            random_users = select_random_elements(data, 4);
-        }
-        console.log("Random users:", random_users);
-        res.status(200).json({ status: 'SUCCESS', data: random_users });
-    } catch (error) {
-        next(error);
-    }
-});
-
-function select_random_elements(array, num_lements) {
-    const random_indexes = [];
-    const selected_elements = [];
-
-    // Generate unique random indexes
-    while (random_indexes.length < num_lements) {
-        const random_index = Math.floor(Math.random() * array.length);
-        if (!random_indexes.includes(random_index)) {
-            random_indexes.push(random_index);
-        }
-    }
-
-    // Select elements at random indexes
-    random_indexes.forEach(index => {
-        selected_elements.push(array[index]);
-    });
-
-    return selected_elements;
-}
-
 module.exports = {
     register,
     login,
     refresh_token,
     logout,
-    get_all_users,
     get_profile,
     edit_profile,
     delete_profile,

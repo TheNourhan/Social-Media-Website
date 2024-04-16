@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { useParams } from 'react-router-dom';
 import PhotoUser from "../../../Public/PhotoUser/PhotoUser";
 import "./NavOtherProfile.css";
-import useFollow from '../../../Utils/UserActions';
+import getTokenConfig from '../../../Utils/TokenUtils';
 
 const user = {
     user_photo:
@@ -12,8 +13,48 @@ const user = {
 };
 
 const NavOtherProfile = (userData) => {
-	const { userId } = useParams();
-  	const { followed, handleFollow, handleUnfollow } = useFollow(userId);
+	const [followed, setFollowed] = useState(false);
+    const { userId } = useParams();
+	const currunt_user = JSON.parse(localStorage.getItem("user"));
+    const currunt_userId = currunt_user._id;
+
+	useEffect(() => {
+		const isFollowing = currunt_user?.following?.includes(userId) || false;
+		setFollowed(isFollowing);
+    }, [currunt_user, userId]);
+
+	const handleFollow = async () => {
+        try {
+			const config = getTokenConfig();
+        	if (!config) return;
+			
+            await axios.post(`/api/users/${userId}/follow`, { followerId: currunt_userId, followeeId: userId }, config );
+            
+			currunt_user.following.push(userId);
+			localStorage.setItem("user", JSON.stringify(currunt_user));
+        } catch (error) {
+            console.error('Error following user:', error);
+        }
+    };
+	const handleUnFollow = async () => {
+        try {
+			const config = getTokenConfig();
+        	if (!config) return;
+			const requestBody = {
+				followerId: currunt_userId,
+				followeeId: userId
+			};
+			
+            await axios.delete(`/api/users/${userId}/unfollow`, { data: requestBody, ...config } );
+			const index = currunt_user.following.indexOf(userId);
+			if (index !== -1) {
+				currunt_user.following.splice(index, 1);
+				localStorage.setItem("user", JSON.stringify(currunt_user));
+			}
+        } catch (error) {
+            console.error('Error following user:', error);
+        }
+    };
 
     return (
         <div className="container__navProfile">
@@ -35,7 +76,7 @@ const NavOtherProfile = (userData) => {
 						{
 							followed 
 							? (
-								<span className="btn btn-primary" onClick={handleUnfollow}>
+								<span className="btn btn-primary" onClick={handleUnFollow}>
 									Unfollow
 								</span>
 							)

@@ -21,9 +21,6 @@ router.route('/refresh_token')
 
 router.route('/logout')
         .get(users_controller.logout);
-
-router.route('/api/users')
-        .get(verfiy_token, users_controller.get_all_users)
  
 router.route('/api/users/:userId')
         .get(verfiy_token, users_controller.get_profile)
