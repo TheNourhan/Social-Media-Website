@@ -1,0 +1,15 @@
+.editprofile{
+    display: flex;
+}
+
+.editprofile__container{
+    flex: 0.5;
+    width: 100%;
+    border-left: 1px solid var(--trekkers-secondary);
+    border-right: 1px solid var(--trekkers-secondary);
+}
+
+.editprofile__form{
+    padding-top: 10%;
+    margin: 5%;
+}
