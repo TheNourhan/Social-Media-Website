@@ -12,7 +12,7 @@ const PersonalProfile = () => {
     const [userData, setUserData] = useState(null);
     const [countries, setCountries] = useState([]);
     const user = JSON.parse(localStorage.getItem("user"));
-    const userId = user._Id;
+    const userId = user._id;
 
     useEffect(() => {
         const fetchUserProfile = async () => {

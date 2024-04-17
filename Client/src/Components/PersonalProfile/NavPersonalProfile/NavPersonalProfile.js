@@ -1,4 +1,4 @@
-
+import { useNavigate } from "react-router-dom";
 import PhotoUser from "../../../Public/PhotoUser/PhotoUser";
 import "./NavPersonalProfile.css";
 
@@ -11,6 +11,11 @@ const user = {
 };
 
 const NavPersonalProfile = (userData) => {
+	const navigate = useNavigate(); 
+    const handleEditClick = () => {
+        navigate(`/profile/edit`);
+    };
+    
     return (
         <div className="container__navProfile">
 			<section className="main__navProfile">
@@ -27,7 +32,7 @@ const NavPersonalProfile = (userData) => {
 						<h2>{userData?.data?.name}</h2>
 						<span>@{userData?.data?.handle}</span>
 					</div>
-					<div className='btn_editProfile-content'>
+					<div onClick={handleEditClick} className='btn_editProfile-content'>
 						<span>Edit Profile</span>
 					</div>
 				</div>

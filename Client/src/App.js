@@ -30,9 +30,9 @@ function App() {
           <Route path="/PostSearch" element={<PostSearch />}></Route>
           <Route path="/peopleSearch" element={<PeopleSearch />}></Route>
           <Route path="/profile" element={<PersonalProfile />}></Route>
+          <Route path="/profile/edit" element={<EditProfile />}></Route>
           <Route path="/profile/:userId" element={<OtherProfile />}></Route>
           <Route path="/profile/:userId/country/:countryId" element={<PostCountry />}></Route>
-          <Route path="/editprofile" element={<EditProfile />}></Route>
         </Routes>
       </div>
     </BrowserRouter>
