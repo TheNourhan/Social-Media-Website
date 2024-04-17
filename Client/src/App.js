@@ -12,6 +12,7 @@ import PostSearch from "./Components/PostSearch/PostSearch";
 import PersonalProfile from './Components/PersonalProfile/PersonalProfile';
 import OtherProfile from './Components/OtherProfile/OtherProfile';
 import PostCountry from './Components/Post-Country/Post-Country';
+import Uploader from "./Components/Uploader/Uploader";
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
           <Route path="/profile" element={<PersonalProfile />}></Route>
           <Route path="/profile/:userId" element={<OtherProfile />}></Route>
           <Route path="/profile/:userId/country/:countryId" element={<PostCountry />}></Route>
+          <Route path="/uploader" element={<Uploader />}></Route>
         </Routes>
       </div>
     </BrowserRouter>
