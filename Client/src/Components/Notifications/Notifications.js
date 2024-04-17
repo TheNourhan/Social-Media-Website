@@ -1,57 +1,44 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Notifications.css";
 import Sidebar from "../Sidebar/Sidebar";
 import Widgets from "../Home/Widgets/Widgets";
 import NotificationItem from "./NotificationItem/NotificationItem";
 import NavNotifications from "./NavNotifications/NavNotifications";
-
+import axios from "axios";
+import getTokenConfig from '../../Utils/TokenUtils';
 import PersonIcon from "@mui/icons-material/Person";
 import { FavoriteOutlined } from "@mui/icons-material";
-import ModeCommentOutlinedIcon from "@mui/icons-material/ModeCommentOutlined";
-
-const user = {
-  user_photo: undefined,
-  image_background:
-    "https://www.xtrafondos.com/wallpapers/vertical/noche-en-las-montanas-con-planetas-de-fondo-7980.jpg",
-  name: "User Name Logged",
-  username: "@username",
-  description: "user description biography",
-  joined_date: "May 2019",
-  count_tweets: 33,
-  following: 49,
-  followers: 8,
-  notifications: [
-    {
-      id: "1",
-      user_photo: undefined,
-      name: "name user",
-      username: "@username",
-      time: "10m",
-      text_notification: " liked your post",
-      icon_notification: <FavoriteOutlined />,
-    },
-    {
-      id: "2",
-      user_photo: undefined,
-      name: "name user",
-      username: "@username2",
-      time: "10m",
-      text_notification: " Add you",
-      icon_notification: <PersonIcon />,
-    },
-    {
-      id: "3",
-      user_photo: undefined,
-      name: "name user",
-      username: "@username2",
-      time: "10m",
-      text_notification: " liked your post",
-      icon_notification: <ModeCommentOutlinedIcon />,
-    },
-  ],
-};
 
 const Notifications = () => {
+  const [notifications, setNotifications] = useState([]);
+  const currentUser = JSON.parse(localStorage.getItem('user'));
+  const currentUserId = currentUser ? currentUser._id : null;
+
+  const formattedNotifications = notifications.map(notification => {
+    return {
+      id: notification._id,
+      user_photo: notification.sender.profilePic,
+      name: `${notification.sender.firstName} ${notification.sender.lastName}`,
+      userId: `${notification.sender._id}`,
+      post_title: notification.type === 'like' ? `:       ${notification.postTitle}` : null,
+      text_notification: notification.type === 'like' ? " liked your post  " : " Add you  ",
+      icon_notification: notification.type === 'like' ? <FavoriteOutlined /> : <PersonIcon />
+    };
+  });
+
+  useEffect(() => {
+    const fetchNotifications = async () => {
+      try {
+        const config = getTokenConfig();
+        if (!config) return;
+        const response = await axios.get(`http://localhost:3000/api/users/${currentUserId}/notifications`, config);
+        setNotifications(response.data.notifications);
+      } catch (error) {
+        console.error('Error fetching notifications:', error);
+      }
+    };
+    fetchNotifications();
+  }, [currentUserId]);
   return (
     <div className="notifications">
       {/**Sidebar */}
@@ -60,16 +47,16 @@ const Notifications = () => {
       <div className="notifications__container">
         <NavNotifications />
         <div className="notificationItem__notificationsList">
-          {user?.notifications?.map((notification, id) => {
-            return (
-              <NotificationItem
-                key={id}
-                notification={notification}
-                owner={user.username === notification.username}
-                icon_notification={user.notifications.icon_notification}
-              />
-            );
-          })}
+          
+        {formattedNotifications.map((notification, id) => (
+            <NotificationItem
+              key={id}
+              notification={notification}
+              owner={currentUserId === notification.userId}
+              icon_notification={notification.icon_notification}
+            />
+          ))}
+
         </div>
       </div>
 

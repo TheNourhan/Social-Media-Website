@@ -12,6 +12,7 @@ router.route('/:userId/countries/:countryId/posts')
         .get(verfiy_token, posts_controller.get_all_posts) // Get country posts for a specific user
         
 router.route('/:userId/countries/:countryId/posts/:postId')
+        .post(verfiy_token, posts_controller.toggle_like)
         .get(posts_controller.get_post)
         .delete(posts_controller.delete_post)
 

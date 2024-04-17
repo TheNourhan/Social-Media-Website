@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs');
 const User = require('../models/user-model');
 const Country = require('../models/country-model');
 const Post = require('../models/post-model');
+const Notification = require('../models/notification-model');
 const mongoose = require("mongoose");
 const jwt = require('jsonwebtoken');
 const {create_access_token, create_refresh_token} = require('../middlewares/genrate-token');
@@ -35,7 +36,7 @@ const register = (async (req ,res ,next) => {
         const error_message ="make sure each field has a valid value.";
         res.status(200).json({error_message: error_message});
     }   
- });
+});
  
 const login = (async(req ,res ,next) => {
     const {logUsername, logPassword} = req.body;
@@ -192,8 +193,12 @@ const follow = (async(req, res, next) => {
             const error = 'Invalid user ID';
             return next(error);
         }
-        const follower = await User.findById(followerId);
-        const followee = await User.findById(followeeId);
+        const follower = await User.findById(followerId, {
+            password: 0,
+        });
+        const followee = await User.findById(followeeId,  {
+            password: 0
+        });
         if (!follower || !followee) {
             const error = 'Follower or followee not found';
             return next(error);
@@ -205,6 +210,15 @@ const follow = (async(req, res, next) => {
         follower.following.push(followeeId);
         followee.followers.push(followerId);
         await Promise.all([follower.save(), followee.save()]);
+
+        const notification = new Notification({
+            recipient: followeeId,
+            sender: followerId,
+            type: 'follow',
+            postTitle: null
+        });
+        await notification.save();
+
         res.status(200).json({ status: 'SUCCESS', message: 'Follow relationship added successfully' });
     } catch (error) {
         next(error);
@@ -231,6 +245,13 @@ const unfollow = (async(req, res, next) => {
         // Remove followeeId from follower's following list and followerId from followee's followers list
         follower.following = follower.following.filter(id => id.toString() !== followeeId.toString());
         followee.followers = followee.followers.filter(id => id.toString() !== followerId.toString());
+
+        // Delete any related notifications
+        await Notification.deleteMany({ 
+            recipient: followeeId, 
+            sender: followerId, 
+            type: 'follow' 
+        });
 
         await Promise.all([follower.save(), followee.save()]);
 
@@ -316,7 +337,6 @@ const get_all_users = (async(req, res, next) => {
         }else{
             random_users = select_random_elements(data, 4);
         }
-        console.log("Random users:", random_users);
         res.status(200).json({ status: 'SUCCESS', data: random_users });
     } catch (error) {
         next(error);

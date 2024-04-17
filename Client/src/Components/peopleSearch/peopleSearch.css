@@ -110,9 +110,9 @@
 
 .border0 {
   border-radius: 10px;
-  padding: 0; /* قمت بإلغاء ال padding */
-  margin-bottom: 3px; /* إضافة التباعد السفلي بمقدار 3px */
-  text-align: center; /* لتوسيط العناصر داخل الحاوية */
+  padding: 0; 
+  margin-bottom: 3px; 
+  text-align: center; 
   margin-left: 60px;
   margin-right: 60px;
   box-shadow: 0 0 10px rgba(14, 7, 7, 0.1);    

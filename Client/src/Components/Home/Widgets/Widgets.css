@@ -2,6 +2,11 @@
     flex: 0.3;
     height: 100vh;
     /*background-color: var(--twitter-secondary);*/
+    position: sticky; 
+    top: 0; 
+    overflow-y: auto; 
+    max-height: 100vh; 
+    
 }
 
 .widgets__container {

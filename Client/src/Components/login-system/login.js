@@ -44,12 +44,12 @@ const Homepage = () => {
           <div className="homepage__topLeft">
             <img
               className="homepage__topLeft-img"
-              src=""
+              src="./images/side.jpg"
               alt=""
             />
           </div>
           <div className="homepage__topRight">
-            <img className="logo" src="" alt="logo" />
+            <img className="logo" src="./images/logo.jpg" alt="logo" />
             <h1 className="homepage__topRight__Titel">Travel Now</h1>
             <h2 className="homepage__topRight__Subtitel">
               Join Trekkers today.

@@ -41,6 +41,9 @@ app.use("/api/users", country_route);
 const post_route = require('./routes/post-route');
 app.use("/api/users/", post_route);
 
+const notification_route = require('./routes/notification-route');
+app.use("/api/users/", notification_route);
+
 app.get("/", middleware.requireLogin, (req ,res ,next) => {
    var payload = {
      pageTitle :"Home",

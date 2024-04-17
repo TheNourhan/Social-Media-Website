@@ -101,6 +101,22 @@
     border-radius: 10px;
 }
 
+.fav__num{
+    margin-right: 10px;
+    font-size:x-small;
+}
+
+.fav__item{
+    float: right;
+    margin-left: 150px;
+    display: flex;
+    align-items: center;
+}
+
+.red {
+    color: red;
+  }
+
 .post__footer {
     display: flex;
     align-items: center;

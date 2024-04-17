@@ -1,16 +1,33 @@
 import { Avatar } from "@mui/material";
+import { useParams } from 'react-router-dom';
 import React from "react";
 import "./CountryPost.css";
+import axios from "axios";
+import getTokenConfig from '../../../../Utils/TokenUtils';
 
-import { MoreHoriz, ChatBubbleOutline, FavoriteBorderOutlined, LocationOnOutlined} from "@mui/icons-material";
+import { MoreHoriz, Favorite, FavoriteBorderOutlined, LocationOnOutlined} from "@mui/icons-material";
 
 const CountryPost = ( {postData} ) => {
-    console.log("postData", postData)
+    const { userId, countryId } = useParams();
+    const currentUser = JSON.parse(localStorage.getItem('user'));
+    const currentUserId = currentUser ? currentUser._id : null;
+
     if (!postData) {
         console.error("postData is undefined");
         return null;
     }
-    const { handle, username, country, title, content } = postData;
+    const { postId, handle, username, country, title, content, likes } = postData;
+    const isCurrentUserLiked = likes.includes(currentUserId);
+    
+    async function handleFavoriteClick() {
+        try {
+            const config = getTokenConfig();
+            if (!config) return;
+            await axios.post(`http://localhost:3000/api/users/${userId}/countries/${countryId}/posts/${postId}`, { current_user: currentUserId }, config);
+        } catch (error) {
+            console.error("Error toggling like:", error);
+        }
+    }
 
     return (
     <div className="post">
@@ -23,8 +40,21 @@ const CountryPost = ( {postData} ) => {
                     <h3>{username}</h3>
                     <h4>@{handle}</h4>
                 </div>
+                <div className="fav__item">
+                    <span className="fav__num">{postData.likes.length}</span> 
+
+                    <div className="icon" onClick={handleFavoriteClick}>
+                        {/*<FavoriteBorderOutlined className="fav_icon"  fontSize="small" />*/}
+                        {isCurrentUserLiked ? (
+                                <Favorite className="fav_icon red" fontSize="small" />
+                            ) : (
+                                <FavoriteBorderOutlined className="fav_icon" fontSize="small" />
+                        )}
+                    </div>
+                </div>
                 <MoreHoriz className="post__options" />
             </div>
+
             <div className="post__country__title">
                 <div className="post__country">
                     <LocationOnOutlined className="post__country__icon" />
@@ -40,10 +70,7 @@ const CountryPost = ( {postData} ) => {
             <div className="post__media">
                 <img src="https://media.istockphoto.com/id/1436430810/photo/paris-eiffel-tower.webp?b=1&s=170667a&w=0&k=20&c=Qm33k45p4AGKtbNcqkx5hhfP7IRo8RYIpW_VdgE2bDU=" alt="" />
             </div>
-            <div className="post__footer">
-                <ChatBubbleOutline fontSize="small" />
-                <FavoriteBorderOutlined fontSize="small" />
-            </div>
+            
         </div>
     </div>
     );

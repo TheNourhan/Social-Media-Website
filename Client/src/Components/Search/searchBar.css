@@ -51,7 +51,9 @@
 }
  
 
-.searchBar{
+.search-form{
+    width: 80%;
+   margin-left: 60px;
    
 }
 

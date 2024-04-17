@@ -3,7 +3,6 @@ import "./PeopleBox.css";
 import useFollow from '../../Utils/UserActions';
 
 const PeopleBox = ({ user }) => {
-    console.log("frinds:", user?.name)
     const userId = user?.id;
     const name = user?.name;
     const handle = user?.handle;

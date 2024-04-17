@@ -1,16 +1,21 @@
-.sidebar{
+.sidebar {
+ 
     flex: 0.2;
     padding: 1rem 2rem;
-    
+
+   
+    position: sticky;
+    top: 0; 
 }
 
-.sidebar__trekkersIcon{
+
+.sidebar__trekkersIcon {
     font-size: 2.5rem !important;
     color: var(--trekkers-primary);
     padding-left: 1rem;
 }
 
-.sidebar__tweet-btn{
+.sidebar__tweet-btn {
     background-color: var(--trekkers-primary) !important;
     color: var(--white) !important;
     text-transform: capitalize !important;
@@ -19,12 +24,14 @@
     padding: 0.7rem 0 !important;
     font-size: 1.1rem !important;
     border: none !important;
+    margin-top: 1rem;
 }
 
-.sidebar__tweet-btn:hover{
+.sidebar__tweet-btn:hover {
     background-color: var(--trekkers-primary-2) !important;
 }
-.sidebar__link{
+
+.sidebar__link {
     text-decoration: none;
     color: black;
 }
