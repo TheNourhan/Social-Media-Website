@@ -6,6 +6,7 @@ import NavPersonalProfile from "./NavPersonalProfile/NavPersonalProfile";
 import AddLocationAltIcon from "@mui/icons-material/AddLocationAlt";
 import PersonalProfilePost from "./PersonalProfilePost/PersonalProfilePost"
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import getTokenConfig from '../../Utils/TokenUtils';
 
 const PersonalProfile = () => {
@@ -13,6 +14,11 @@ const PersonalProfile = () => {
     const [countries, setCountries] = useState([]);
     const user = JSON.parse(localStorage.getItem("user"));
     const userId = user._id;
+
+    const navigate = useNavigate(); 
+    const handleAddCountryClick = () => {
+        navigate(`/add/country`);
+    };
 
     useEffect(() => {
         const fetchUserProfile = async () => {
@@ -51,7 +57,7 @@ const PersonalProfile = () => {
                 <NavPersonalProfile
                 {...userData} />
                 <div className="PersonalProfile__btn_addcountry__container">
-                    <div className='btn_addcountry-content'>
+                    <div onClick={handleAddCountryClick} className='btn_addcountry-content'>
                         <AddLocationAltIcon />
 						<span>Add country</span>
 					</div>
