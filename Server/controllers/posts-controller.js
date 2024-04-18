@@ -62,6 +62,7 @@ const get_all_posts =  (async (req, res, next) => {
                 postId: post._id,
                 handle: user.username,
                 username: user.firstName + " " +  user.lastName,
+                avatar: user.avatar,
                 countryId: country._id,
                 country: country.country,
                 title: post.title,

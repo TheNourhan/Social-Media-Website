@@ -29,10 +29,13 @@ const UserSchema = new Schema({
         type: String,
         required: true,
     },
-    profilePic:{
+    avatar:{
         type: String,
-        required:true,
-        default:"/images/profilePic.png",
+        default: '/avatar.jpg'
+    },
+    header:{
+        type: String,
+        default: '/header.jpg'
     },
     followers:[{
         type: ObjectId,

@@ -6,11 +6,6 @@ import axios from "axios";
 
 import {
     ImageOutlined,
-    GifBoxOutlined,
-    PollOutlined,
-    SentimentSatisfiedAltOutlined,
-    CalendarTodayOutlined,
-    LocationOnOutlined
 } from "@mui/icons-material";
 
 const TweetBox = () => {
@@ -18,7 +13,7 @@ const TweetBox = () => {
     const [post, setPost] = useState('');
     const { state } = useLocation();
     const username = state && state.id;
-    console.log("username: ",username);
+    const user = JSON.parse(localStorage.getItem('user'));
 
     async function handleSubmit(e) {
       e.preventDefault();
@@ -41,7 +36,7 @@ const TweetBox = () => {
     return (
         <div className="tweetbox">
             <form method='POST' onSubmit={handleSubmit} className="tweetbox__form">
-                <Avatar className="tweetbox__avatar" />
+                <Avatar src={'/uploads/' + user.avatar } className="tweetbox__avatar" />
                 <div className="tweetbox__form-field">
                     <div className="tweetbox__input">
                         <input 
@@ -55,11 +50,7 @@ const TweetBox = () => {
                     <div className="tweetbox__input">
                         <div className="tweetbox__icons">
                             <ImageOutlined className="tweetbox__icon" />
-                            <GifBoxOutlined className="tweetbox__icon" />
-                            <PollOutlined className="tweetbox__icon" />
-                            <SentimentSatisfiedAltOutlined className="tweetbox__icon" />
-                            <CalendarTodayOutlined className="tweetbox__icon" />
-                            <LocationOnOutlined className="tweetbox__icon" />
+                            
                         </div>
                         <Button type="submit" className="tweetbox__btn">Post</Button>
                     </div>

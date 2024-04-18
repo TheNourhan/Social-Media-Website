@@ -34,6 +34,7 @@ function App() {
           <Route path="/profile/:userId" element={<OtherProfile />}></Route>
           <Route path="/profile/:userId/country/:countryId" element={<PostCountry />}></Route>
           <Route path="/add/country" element={<Uploader />}></Route>
+          <Route path="/edit/country/:countryId" element={<Uploader />}></Route>
         </Routes>
       </div>
     </BrowserRouter>

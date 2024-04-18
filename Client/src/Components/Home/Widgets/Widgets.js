@@ -33,7 +33,6 @@ const Widgets = () => {
                     <PeopleBox user={user} />
                 </Link>
             ))}
-            <PeopleBox />
             
         </div>
     );

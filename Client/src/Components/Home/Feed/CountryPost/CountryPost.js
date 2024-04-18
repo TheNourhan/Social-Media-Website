@@ -3,11 +3,13 @@ import { useParams } from 'react-router-dom';
 import React from "react";
 import "./CountryPost.css";
 import axios from "axios";
+import CustomMenu from '../../../OptionMenu/OptionMenu';
 import getTokenConfig from '../../../../Utils/TokenUtils';
 
-import { MoreHoriz, Favorite, FavoriteBorderOutlined, LocationOnOutlined} from "@mui/icons-material";
+import { Favorite, FavoriteBorderOutlined, LocationOnOutlined} from "@mui/icons-material";
 
 const CountryPost = ( {postData} ) => {
+    console.log("postData",postData)
     const { userId, countryId } = useParams();
     const currentUser = JSON.parse(localStorage.getItem('user'));
     const currentUserId = currentUser ? currentUser._id : null;
@@ -16,7 +18,7 @@ const CountryPost = ( {postData} ) => {
         console.error("postData is undefined");
         return null;
     }
-    const { postId, handle, username, country, title, content, likes } = postData;
+    const { postId, handle, username, avatar, country, title, content, likes } = postData;
     const isCurrentUserLiked = likes.includes(currentUserId);
     
     async function handleFavoriteClick() {
@@ -28,11 +30,20 @@ const CountryPost = ( {postData} ) => {
             console.error("Error toggling like:", error);
         }
     }
+    async function handleDeletePost() {
+        try {
+            const config = getTokenConfig();
+            if (!config) return;
+            await axios.delete(`http://localhost:3000/api/users/${userId}/countries/${countryId}/posts/${postId}`, config);
+        } catch (error) {
+            console.error("Error deleting post:", error);
+        }
+    }
 
     return (
     <div className="post">
         <Avatar 
-            src="https://www.austrianpost.de/images/10-Mobil-Startseite-768x576px.jpg"
+            src={'/uploads/' + avatar}
             className="post__avatar" />
         <div className="post__content">
             <div className="post__header">
@@ -52,7 +63,14 @@ const CountryPost = ( {postData} ) => {
                         )}
                     </div>
                 </div>
-                <MoreHoriz className="post__options" />
+                
+                <CustomMenu 
+                    items={[
+                        { label: "Delete item", onClick: handleDeletePost },
+                    ]}
+                >
+                </CustomMenu>
+
             </div>
 
             <div className="post__country__title">

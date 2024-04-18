@@ -12,15 +12,12 @@ const cookieParser = require('cookie-parser');
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'Client', 'src')));
-/*
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'Client', 'src', 'index.js'));
-});
-*/
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 app.use(bodyParser.urlencoded({extended:false}));
 const corsOption = {
    origin: "*",
-   methods: "GET,HEAD,PUT,PATCH,POST,DELET",
+   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
    credential: true,
 };
 app.use(cors(corsOption));

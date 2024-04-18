@@ -6,7 +6,7 @@ const PeopleBox = ({ user }) => {
     const userId = user?.id;
     const name = user?.name;
     const handle = user?.handle;
-    const avater = user?.avater;
+    const avatar = user?.avatar;
     //const bio = user?.bio;
 
 	const { followed, handleFollow, handleUnfollow } = useFollow(userId);
@@ -14,7 +14,7 @@ const PeopleBox = ({ user }) => {
     return (
         <div className="suggestFriend">
             <div className="suggestImgContainer">
-                <img className="suggestImg" src={avater} alt="" />
+                <img className="suggestImg" src={'/uploads/' + avatar} alt="" />
             </div>
             <div className="name">
                 <span className="suggestName">{name} <br />

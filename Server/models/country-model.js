@@ -11,7 +11,7 @@ const CountrySchema = new Schema({
         type: String,
         required: true,
     },
-    photo:{
+    countryPhoto:{
         type: String,
     },
 },{ timestamps:true});

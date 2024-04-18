@@ -15,9 +15,10 @@
     display: flex;
 }
 
-.uplouder__label-content{
+.uplouder__label-content .react-select__option{
     padding: 15px;
-    width: 40%;
+    width: 100%;
+    color: rgb(0, 0, 0);
 }
 
 .uploader__label{
@@ -34,7 +35,7 @@
 
 .uploader__select{
     padding: 15px;
-    width: 45%;
+    width: 100%;
     border: none;
 }
 
@@ -52,11 +53,7 @@
     margin: 30px;
 }
 
-.uploader__select-content:hover{
-    background-color: var(--grey-2);
-    color: var(--white);
-    border: none;
-}
+
 
 .uploader__select-option{
     border: none;

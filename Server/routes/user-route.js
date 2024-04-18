@@ -5,6 +5,7 @@ const cors = require('cors');
 const bodyParser = require("body-parser");
 const users_controller = require('../controllers/users-controller');
 const verfiy_token = require('../middlewares/verfiy-token');
+const upload = require('../middlewares/upload-img');
 
 app.use(bodyParser.urlencoded({extended:false}));
 
@@ -27,8 +28,11 @@ router.route('/api/users')
  
 router.route('/api/users/:userId')
         .get(verfiy_token, users_controller.get_profile)
-        .put(verfiy_token, users_controller.edit_profile)
         .delete(verfiy_token, users_controller.delete_profile)
+
+router.route('/api/users/:userId/edit')
+        .get(verfiy_token, users_controller.get_edit_profile_info)
+        .put(verfiy_token, upload.fields([{ name: 'avatar' }, { name: 'header' }]), users_controller.edit_profile)
         
 router.route('/api/users/:userId/follow')
         .post(verfiy_token, users_controller.follow)
