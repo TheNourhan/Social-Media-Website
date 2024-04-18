@@ -1,4 +1,4 @@
-const getTokenConfig = () => {
+const getTokenConfigUploadImage = () => {
     const token = localStorage.getItem("token");
     if (!token) {
         console.error("Token not found in local storage.");
@@ -8,8 +8,10 @@ const getTokenConfig = () => {
         headers: {
             Authorization: `Bearer ${token}`,
             Accept: "application/json",
+            "Content-type":
+            "multipart/form-data; boundary=<calculated when request is sent>",
         },
     };
 };
 
-export default getTokenConfig;
+export default getTokenConfigUploadImage;

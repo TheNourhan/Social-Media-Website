@@ -6,6 +6,7 @@ const Notification = require('../models/notification-model');
 const mongoose = require("mongoose");
 const jwt = require('jsonwebtoken');
 const {create_access_token, create_refresh_token} = require('../middlewares/genrate-token');
+const delete_files = require('../utils/delete-files');
 
 const register = (async (req ,res ,next) => {
     const {firstName, lastName, username, email, password} = req.body;
@@ -131,9 +132,33 @@ const get_profile = (async(req, res, next) => {
         const data = {
             name: user.firstName + " " +user.lastName,
             handle: user.username,
-            photo: user.profilePic,
+            avatar: user.avatar,
+            header: user.header,
             followers: user.followers.length,
             following: user.following.length,
+            bio: user.bio
+        }
+        res.status(200).json({ status: 'SUCCESS', data: data });
+    }catch(error){
+        next(error);
+    }
+});
+
+const get_edit_profile_info = (async(req, res, next) => {
+    try{
+        const userId = req.params.userId;
+        if (!userId || !mongoose.Types.ObjectId.isValid(userId)) {
+            const error = 'Invalid user ID';
+            return next(error);
+        }
+        const user = await User.findById(userId);
+        if(!user){
+            const error = 'User not found';
+            return next(error);
+        }
+        const data = {
+            firstName: user.firstName,
+            lastName: user.lastName,
             bio: user.bio
         }
         res.status(200).json({ status: 'SUCCESS', data: data });
@@ -145,18 +170,44 @@ const get_profile = (async(req, res, next) => {
 const edit_profile = (async(req, res, next) => {
     try{
         const userId = req.params.userId;
-        const { firstName, lastName, profilePic, bio } = req.body;
+        const { firstName, lastName, bio } = req.body;
+        const avatarFiles = req.files['avatar'];
+        const headerFiles = req.files['header'];
+
         if (!userId || !mongoose.Types.ObjectId.isValid(userId)) {
             const error = 'Invalid user ID';
             return next(error);
         }
-        const updated_user = await User.findByIdAndUpdate(userId, {
-            firstName,
-            lastName,
-            profilePic,
-            bio
-        }, { new: true });
-        if(!updated_user){
+        let updateData = {};
+        
+        if (firstName) updateData.firstName = firstName;
+        if (lastName) updateData.lastName = lastName;
+        if (bio) updateData.bio = bio;
+
+        if (avatarFiles) {
+            if (Array.isArray(avatarFiles)) {
+                // Delete old avatar files if new ones are uploaded
+                const oldAvatarFilenames = await User.findById(userId).select('avatar').lean();
+                if (oldAvatarFilenames.avatar) {
+                    await delete_files([oldAvatarFilenames.avatar]);
+                }
+                updateData.avatar = avatarFiles[0].filename;
+            }
+        }
+
+        if (headerFiles) {
+            if (Array.isArray(headerFiles)) {
+                // Delete old header files if new ones are uploaded
+                const oldHeaderFilenames = await User.findById(userId).select('header').lean();
+                if (oldHeaderFilenames.header) {
+                    await delete_files([oldHeaderFilenames.header]);
+                }
+                updateData.header = headerFiles[0].filename;
+            }
+        }
+
+        const updated_user = await User.findByIdAndUpdate(userId, updateData, { new: true });
+        if (!updated_user) {
             const error = 'User not found';
             return next(error);
         }
@@ -321,7 +372,7 @@ const get_all_users = (async(req, res, next) => {
             id: user._id,
             name: user.firstName + " " + user.lastName,
             handle: user.username,
-            avatar: user.profilePic,
+            avatar: user.avatar,
             bio: user.bio,
         }));
         const data = [];
@@ -369,6 +420,7 @@ module.exports = {
     refresh_token,
     logout,
     get_all_users,
+    get_edit_profile_info,
     get_profile,
     edit_profile,
     delete_profile,

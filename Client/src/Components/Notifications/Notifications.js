@@ -17,7 +17,7 @@ const Notifications = () => {
   const formattedNotifications = notifications.map(notification => {
     return {
       id: notification._id,
-      user_photo: notification.sender.profilePic,
+      avatar: notification.sender.avatar,
       name: `${notification.sender.firstName} ${notification.sender.lastName}`,
       userId: `${notification.sender._id}`,
       post_title: notification.type === 'like' ? `:       ${notification.postTitle}` : null,

@@ -4,23 +4,33 @@ import { useState, useEffect } from 'react';
 
 const useFollow = (userId) => {
   const [followed, setFollowed] = useState(false);
-  const currentUser = JSON.parse(localStorage.getItem('user'));
-  const currentUserId = currentUser._id;
+  const [currentUserId, setCurrentUserId] = useState(null);
 
   useEffect(() => {
+    const currentUser = JSON.parse(localStorage.getItem('user'));
+    setCurrentUserId(currentUser._id); 
     const isFollowing = currentUser?.following?.includes(userId) || false;
     setFollowed(isFollowing);
-  }, [currentUser, userId]);
+  }, [userId]); 
+
 
   const handleFollow = async () => {
     try {
       const config = getTokenConfig();
       if (!config) return;
+      const requestBody = {
+        followerId: currentUserId,
+        followeeId: userId
+      };
 
-      await axios.post(`/api/users/${userId}/follow`, { followerId: currentUserId, followeeId: userId }, config);
+      console.log("req",currentUserId, userId)
 
+      await axios.post(`/api/users/${userId}/follow`, requestBody, config);
+
+      const currentUser = JSON.parse(localStorage.getItem('user'));
       currentUser.following.push(userId);
       localStorage.setItem('user', JSON.stringify(currentUser));
+      setFollowed(true);
     } catch (error) {
       console.error('Error following user:', error);
     }
@@ -36,10 +46,12 @@ const useFollow = (userId) => {
       };
 
       await axios.delete(`/api/users/${userId}/unfollow`, { data: requestBody, ...config });
+      const currentUser = JSON.parse(localStorage.getItem('user'));
       const index = currentUser.following.indexOf(userId);
       if (index !== -1) {
         currentUser.following.splice(index, 1);
         localStorage.setItem('user', JSON.stringify(currentUser));
+        setFollowed(false);
       }
     } catch (error) {
       console.error('Error unfollowing user:', error);
