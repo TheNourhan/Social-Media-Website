@@ -22,7 +22,7 @@ const PostSchema = new Schema({
       trim: true,
       maxlength: 1000,
    },
-   photo:{
+   postPhoto:{
       type: String,
    },
    likes:[{

@@ -13,9 +13,10 @@ const CountrySchema = new Schema({
     },
     countryPhoto:{
         type: String,
+        default: '/default/trekkers.jpg'
     },
 },{ timestamps:true});
 
-var country = mongoose.model('Country', CountrySchema);
+const Country = mongoose.model('Country', CountrySchema);
 
-module.exports = country;
+module.exports = Country;

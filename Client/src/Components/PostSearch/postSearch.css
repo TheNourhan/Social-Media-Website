@@ -1,20 +1,19 @@
 .people{
     display:flex;
-    
+    text-decoration: none;
+    color: black;
 }
 .countryName1 label{
-  
         width: 90%; 
         height: 30px; 
         font-size: 16px; 
         padding: 5px; 
         margin-top: 10px;
         text-align: center;
-        background-color: rgb(232, 188, 155);
-        border-color: rgb(249, 99, 45);
+        background-color: var(--trekkers-primary);
         display:block;
         margin-left: 5%;
-        border-radius: 33px ; 
+        border-radius: 10px ; 
         
 }
 .title1 label{
@@ -22,13 +21,12 @@
     height: 30px; 
     font-size: 16px; 
     padding: 4.5px; 
-    margin-top: 20px;
+    margin-top: 0.5rem;
     text-align: center;
-    background-color: rgb(53, 123, 202);
+    background-color: var(--grey);
     display:block;
     margin-left: 5%;
-    border: 3px solid black;
-    border-radius: 33px ; 
+    border-radius: 10px ; 
 
 }
 .gragh1 p{
@@ -41,9 +39,12 @@
 }
 
 .countryImg1{
+
     width: 80%; 
     height: 300px; 
-    margin-top: 30px;
+    margin-top: 10px;
+    margin-bottom: 0px;
+
 }
 
 .border{
@@ -51,6 +52,9 @@
     background-color: rgb(231, 231, 231);
     border-radius: 10px;
     margin: 1px;
+    width: 80%;
+    margin-left: 60px;
+    align-items: center;
 }
 .border:hover{
     background-color:  white;
@@ -79,5 +83,5 @@
     font-size: small;
     display: flex;
     
-    }
+}
       

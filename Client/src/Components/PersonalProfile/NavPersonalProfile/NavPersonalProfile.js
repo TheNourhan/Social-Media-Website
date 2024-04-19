@@ -4,9 +4,15 @@ import "./NavPersonalProfile.css";
 
 const NavPersonalProfile = (userData) => {
 	console.log("userData",userData)
+	const user = JSON.parse(localStorage.getItem("user"));
+    const userId = user._id;
 	const navigate = useNavigate(); 
     const handleEditClick = () => {
         navigate(`/profile/edit`);
+    };
+
+	const handleFollowingClick = () => {
+        navigate(`/profile/${userId}/following`);
     };
     
     return (
@@ -36,11 +42,11 @@ const NavPersonalProfile = (userData) => {
 						</div>
 					</div>
 					<div className='main__followBtns'>
-						<div>
+						<div onClick={handleFollowingClick}>
 							<span className='followBtn__number'>{userData?.data?.following}</span>
 							<span className='followBtn__text'>Following</span>
 						</div>
-						<div>
+						<div onClick={handleFollowingClick}>
 							<span className='followBtn__number'>{userData?.data?.followers}</span>
 							<span className='followBtn__text'>Followers</span>
 						</div>

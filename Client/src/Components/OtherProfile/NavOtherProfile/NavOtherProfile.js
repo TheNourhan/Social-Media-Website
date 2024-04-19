@@ -2,12 +2,17 @@ import React from "react";
 import { useParams } from 'react-router-dom';
 import PhotoUser from "../../../Public/PhotoUser/PhotoUser";
 import "./NavOtherProfile.css";
+import { useNavigate } from "react-router-dom";
 import useFollow from '../../../Utils/UserActions';
 
 const NavOtherProfile = (userData) => {
 	console.log('user data other', userData)
 	const { userId } = useParams();
   	const { followed, handleFollow, handleUnfollow } = useFollow(userId);
+	const navigate = useNavigate(); 
+	const handleFollowingClick = () => {
+        navigate(`/profile/${userId}/following`);
+    };
 
     return (
         <div className="container__navProfile">
@@ -48,11 +53,11 @@ const NavOtherProfile = (userData) => {
 						</div>
 					</div>
 					<div className='main__followBtns'>
-						<div>
+						<div onClick={handleFollowingClick}>
 							<span className='followBtn__number'>{userData?.data?.following}</span>
 							<span className='followBtn__text'>Following</span>
 						</div>
-						<div>
+						<div onClick={handleFollowingClick}>
 							<span className='followBtn__number'>{userData?.data?.followers}</span>
 							<span className='followBtn__text'>Followers</span>
 						</div>

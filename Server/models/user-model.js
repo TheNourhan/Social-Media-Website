@@ -31,11 +31,11 @@ const UserSchema = new Schema({
     },
     avatar:{
         type: String,
-        default: '/avatar.jpg'
+        default: '/default/avatar.jpg'
     },
     header:{
         type: String,
-        default: '/header.jpg'
+        default: '/default/header.jpg'
     },
     followers:[{
         type: ObjectId,

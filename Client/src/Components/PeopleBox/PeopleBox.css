@@ -8,7 +8,9 @@
     width: 75%;
     padding: 10px;
     border-radius: 10px;
-    margin-left: 20px;
+    margin-left: 60px;
+    margin-right: 60px;
+    margin-bottom: 3px;
     box-shadow: 0 0 10px rgba(14, 7, 7, 0.1);
 }
 
@@ -76,6 +78,16 @@
     margin-top: 30px;
     margin-left: 20px;
 }
-.follow-btn{
-    float: left;
+
+.btn{
+    margin-left: 70px;
+     width: 150px;
+     cursor: pointer;
+     background-color: var(--trekkers-primary) !important;
+     color: var(--white) !important;
+     text-transform: capitalize !important;
+     border-radius: 33px !important; 
+     padding: 0.5rem 0 !important;
+     font-size: 1rem !important;
+     border: none !important;
 }
