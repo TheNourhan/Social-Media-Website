@@ -1,5 +1,4 @@
 const Notification = require('../models/notification-model');
-const Post = require('../models/post-model');
 
 const get_notifications = (async (req ,res ,next) => {
     try {

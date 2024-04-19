@@ -9,7 +9,6 @@ import getTokenConfig from '../../../../Utils/TokenUtils';
 import { Favorite, FavoriteBorderOutlined, LocationOnOutlined} from "@mui/icons-material";
 
 const CountryPost = ( {postData} ) => {
-    console.log("postData",postData)
     const { userId, countryId } = useParams();
     const currentUser = JSON.parse(localStorage.getItem('user'));
     const currentUserId = currentUser ? currentUser._id : null;
@@ -18,7 +17,7 @@ const CountryPost = ( {postData} ) => {
         console.error("postData is undefined");
         return null;
     }
-    const { postId, handle, username, avatar, country, title, content, likes } = postData;
+    const { postId, handle, username, avatar, country, title, content, likes, postPhoto } = postData;
     const isCurrentUserLiked = likes.includes(currentUserId);
     
     async function handleFavoriteClick() {
@@ -34,7 +33,7 @@ const CountryPost = ( {postData} ) => {
         try {
             const config = getTokenConfig();
             if (!config) return;
-            await axios.delete(`http://localhost:3000/api/users/${userId}/countries/${countryId}/posts/${postId}`, config);
+            await axios.delete(`http://localhost:3000/api/users/${userId}/countries/${countryId}/posts/${postId}`, config);    
         } catch (error) {
             console.error("Error deleting post:", error);
         }
@@ -64,12 +63,14 @@ const CountryPost = ( {postData} ) => {
                     </div>
                 </div>
                 
-                <CustomMenu 
-                    items={[
-                        { label: "Delete item", onClick: handleDeletePost },
-                    ]}
-                >
-                </CustomMenu>
+                {currentUserId === userId && (
+                        <CustomMenu
+                            items={[
+                                { label: "Delete item", onClick: handleDeletePost },
+                            ]}
+                        >
+                        </CustomMenu>
+                )}
 
             </div>
 
@@ -86,7 +87,7 @@ const CountryPost = ( {postData} ) => {
                 {content}
             </div>
             <div className="post__media">
-                <img src="https://media.istockphoto.com/id/1436430810/photo/paris-eiffel-tower.webp?b=1&s=170667a&w=0&k=20&c=Qm33k45p4AGKtbNcqkx5hhfP7IRo8RYIpW_VdgE2bDU=" alt="" />
+                <img src={'/uploads/' + postPhoto} alt="" />
             </div>
             
         </div>

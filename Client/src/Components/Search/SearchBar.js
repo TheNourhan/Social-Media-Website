@@ -2,38 +2,61 @@ import React, { useState } from "react";
 import "./searchBar.css";
 import Sidebar from "../Sidebar/Sidebar";
 import Widgets from "../Home/Widgets/Widgets";
+import axios from 'axios';
+import getTokenConfig from '../../Utils/TokenUtils';
+import PeopleBox from '../PeopleBox/PeopleBox';
+import PostsSearch from '../PostSearch/PostSearch';
 
 const SearchPage = () => {
-    const [selectedOption, setSelectedOption] = useState("");
+    const [searchQuery, setSearchQuery] = useState('');
+    const [searchResults, setSearchResults] = useState([]);
 
-    const handleChange = (event) => {
-        const selectedValue = event.target.value;
-        setSelectedOption(selectedValue);
-        if (selectedValue === "People") {
-            window.location.href = "/PeopleSearch";
-        } else if (selectedValue === "Countries") {
-            window.location.href = "/CountrySearch";
-        } else if (selectedValue === "Posts") {
-            window.location.href = "/PostSearch";
-        }
+    const handleSearchAll = async () => {
+        try{const config = getTokenConfig();
+            if (!config) return;
+            const response = await axios.post("http://localhost:3003/api/search/", { query: searchQuery }, config)
+            setSearchResults(response.data);
+        }catch(error){
+            console.error("Error:", error);
+        };
     };
-
+    
     return (
         <div className="searchBar">
           
-                <Sidebar />
+            <Sidebar />
          
             <div className="container">
                 <h2>Search Page</h2>
                 <div className="search-form">
-                    <input type="text" placeholder="search here.." />
-                    <select className="Select" style={{ fontSize: "20px" }} onChange={handleChange} value={selectedOption}>
-                        <option value=""> Search about </option> 
-                        <option value="People">People</option>
-                        <option value="Countries">Countries</option>
-                        <option value="Posts">Posts</option>
-                    </select>
+                    <input 
+                        type="text" 
+                        placeholder="search here.."
+                        value={searchQuery}
+                        onChange={(event) => setSearchQuery(event.target.value)}
+                    />
+                    <button 
+                        className="Select" 
+                        style={{ fontSize: "16px", width: "120px" }} 
+                        onClick={handleSearchAll} 
+                        type="submit"
+                    >
+                        search
+                    </button>
                 </div>
+                
+                {searchResults.type === 'users' && (
+                    searchResults.data.map(user => (
+                        <PeopleBox key={user._id} user={user} />
+                    ))
+                )}
+
+                {searchResults.type === 'posts' && (
+                    searchResults.data.map(post => (
+                        <PostsSearch key={post._id} postData={post} />
+                    ))
+                )}
+
             </div>
             
             <Widgets/>

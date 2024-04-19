@@ -41,6 +41,9 @@ app.use("/api/users/", post_route);
 const notification_route = require('./routes/notification-route');
 app.use("/api/users/", notification_route);
 
+const search = require('./routes/search-route');
+app.use("/api/search/", search);
+
 app.get("/", middleware.requireLogin, (req ,res ,next) => {
    var payload = {
      pageTitle :"Home",
