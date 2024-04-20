@@ -3,6 +3,7 @@ import React, { useState} from 'react';
 import { useLocation } from 'react-router-dom';
 import "./TweetBox.css";
 import axios from "axios";
+import CountrySelector from '../../../Uploader/CountrySelector'
 
 import {
     ImageOutlined,
@@ -36,21 +37,38 @@ const TweetBox = () => {
     return (
         <div className="tweetbox">
             <form method='POST' onSubmit={handleSubmit} className="tweetbox__form">
-                <Avatar src={'/uploads/' + user.avatar } className="tweetbox__avatar" />
+                <Avatar src={'/uploads/' } className="tweetbox__avatar" />
                 <div className="tweetbox__form-field">
+                    <div className="tweetbox__input tweetbox__input-title">
+                        <input 
+                            className="tweetbox__input-input"
+                            type="text"
+                            placeholder=" What is your post title?"
+                        />
+                    </div>
                     <div className="tweetbox__input">
                         <input 
+                            className="tweetbox__input-input tweetbox__input-post"
                             type="text"
                             name="post"
                             value={post}
                             onChange={(e)=>{setPost(e.target.value)}}
-                            placeholder="Where did you go?"
+                            placeholder=" Where did you go?"
                         />
                     </div>
                     <div className="tweetbox__input">
                         <div className="tweetbox__icons">
-                            <ImageOutlined className="tweetbox__icon" />
-                            
+                            <input type='file' id="file" accept="image/*" hidden />
+                            <label htmlFor="file">
+                                <ImageOutlined className="tweetbox__icon" />
+                            </label>
+                            <select value='' onChange=''className="tweetbox__select-content" >
+                                <option className="tweetbox__select-option" value="">Select Country</option>
+                                <option className="tweetbox__select-option" value="Germany">Germany</option>
+                                <option className="tweetbox__select-option" value="USA">USA</option>
+                                <option className="tweetbox__select-option" value="UK">UK</option>
+                                {/* Add more options as needed */}
+                            </select>
                         </div>
                         <Button type="submit" className="tweetbox__btn">Post</Button>
                     </div>

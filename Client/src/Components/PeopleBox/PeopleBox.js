@@ -4,10 +4,10 @@ import useFollow from '../../Utils/UserActions';
 import { useNavigate } from "react-router-dom";
 
 const PeopleBox = ({ user }) => {
-    const userId = user?.id || user?._id;
-    const name = user?.name || user?.firstName + ' ' +  user?.lastName;
-    const handle = user?.handle || user?.username;
-    const avatar = user?.avatar;
+    const userId = '';
+    const name = '';
+    const handle = '';
+    const avatar = '';
     //const bio = user?.bio;
 
 	const { followed, handleFollow, handleUnfollow } = useFollow(userId);
