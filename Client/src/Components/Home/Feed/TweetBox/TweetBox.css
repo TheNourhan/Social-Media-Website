@@ -19,20 +19,34 @@
     justify-content: space-between;
 }
 
-.tweetbox__input input {
+.tweetbox__input-input {
     border: none;
-    height: 3rem;
+    height: 2.5rem;
     width: 100%;
+    border-bottom: 1px solid var(--trekkers-secondary);
+    margin-bottom: 1rem;
+    border-radius: 10px;
+}
+
+.tweetbox__input-input::placeholder {
+    font-size: 1.2rem;
+}
+
+.tweetbox__input-title{
+    width: 50%;
+}
+
+.tweetbox__input-post{
+    border: none;
+    height: 5rem;
+    width: 90%;
     border-bottom: 1px solid var(--trekkers-secondary);
     margin-bottom: 1rem;
 }
 
-.tweetbox__input input::placeholder {
-    font-size: 1.2rem;
-}
-
 .tweetbox__icons{
     color: var(--trekkers-primary) !important;
+    width: fit-content;
 }
 
 .tweetbox__icon{
@@ -51,4 +65,32 @@
 
 .tweetbox__btn:hover {
     background-color: var(--trekkers-primary-2) !important;
+}
+
+.tweetbox__select-content{
+    border: none;
+    text-transform: capitalize ;
+    font-size: 0.9rem ;
+    text-align: center;
+    border-radius: 33px;
+    background-color: var(--trekkers-primary);
+    color: var(--white);
+    cursor: pointer;
+    padding:  8px 30px;
+}
+
+.tweetbox__select-content:hover {
+    background-color: var(--trekkers-primary-2);
+}
+
+.tweetbox__select-option{
+    border: none;
+    background-color: var(--white);
+    color: var(--trekkers-primary);
+}
+
+.tweetbox__select-option:hover{
+    border: none;
+    background-color: var(--grey-2);
+    color: var(--white);
 }
