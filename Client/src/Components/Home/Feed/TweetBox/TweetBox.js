@@ -37,7 +37,7 @@ const TweetBox = () => {
     return (
         <div className="tweetbox">
             <form method='POST' onSubmit={handleSubmit} className="tweetbox__form">
-                <Avatar src={'/uploads/' } className="tweetbox__avatar" />
+                <Avatar src={'/uploads/' + user.avatar} className="tweetbox__avatar" />
                 <div className="tweetbox__form-field">
                     <div className="tweetbox__input tweetbox__input-title">
                         <input 
