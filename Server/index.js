@@ -8,6 +8,7 @@ const session = require("express-session");
 const path = require('path');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+const socket = require('./socket/socket');
 
 app.use(cookieParser());
 app.use(express.json());
@@ -43,6 +44,12 @@ app.use("/api/users/", notification_route);
 
 const search = require('./routes/search-route');
 app.use("/api/search/", search);
+
+const conversation = require('./routes/conversations-route');
+app.use("/api/conversations/", conversation);
+
+const message = require('./routes/messages-route');
+app.use("/api/messages/", message);
 
 app.get("/", middleware.requireLogin, (req ,res ,next) => {
    var payload = {

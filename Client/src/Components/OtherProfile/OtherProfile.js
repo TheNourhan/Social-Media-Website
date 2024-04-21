@@ -19,9 +19,7 @@ const OtherProfile = () => {
                 const config = getTokenConfig();
         	    if (!config) return;
                 const response = await axios.get(`http://localhost:3003/api/users/${userId}`,config);
-                console.log("User profile data:", response.data);
-                setUserData(response.data);
-                        
+                setUserData(response.data);          
             } catch (error) {
                 console.error("Error fetching posts:", error);
             }
