@@ -1,11 +1,8 @@
-
-.people{
-    display:flex;
-
+.searchBar{
+    display: flex;
 }
 
 .countryName label{
-  
         width: 90%; 
         height: 30px; 
         font-size: 16px; 
@@ -16,8 +13,6 @@
         border-color: rgb(249, 99, 45);
         display:block;
         margin-left: 5%;
-        
-       
 }
 .title label{
     width: 90%; 
@@ -29,16 +24,12 @@
     background-color: rgb(53, 123, 202);
     display:block;
     margin-left: 5%;
-    
-
 }
 .gragh p{
     text-align: center;
-  
     margin: 20px;
     text-justify: auto;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
 }
 
 .countryImg{

@@ -116,3 +116,8 @@
 .followBtn__text{
     color: var(--grey-2);
 }
+
+.mail__icon{
+    height: 25px;
+    float: left;
+}

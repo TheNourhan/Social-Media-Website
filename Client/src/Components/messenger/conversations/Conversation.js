@@ -1,12 +1,35 @@
-import "./conversation.css"
+import axios from "axios";
+import { useEffect, useState } from "react";
+import "./conversation.css";
+import getTokenConfig from '../../../Utils/TokenUtils';
 
-const Conversations = () => {
-    return (
-        <div className ="conversation">
-          <img className="conversationImg" src="/images/medieval-276019_1280.jpg" alt="costume image"/>  
-            <span className="conversationName">luna Doe luna dou</span>         
-        </div>
-    );
+export default function Conversation({ conversation, currentUser }) {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const friendId = conversation.members.find((m) => m !== currentUser._id);
+
+    const getUser = async () => {
+      try {
+        const config = getTokenConfig();
+        if (!config) return;
+        const res = await axios(`http://localhost:3003/api/users/${friendId}`, config);
+        setUser(res.data.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getUser();
+  }, [currentUser, conversation]);
+
+  return (
+    <div className="conversation">
+      <img
+        className="conversationImg"
+        src={'/uploads/' + user?.avatar}
+        alt=""
+      />
+      <span className="conversationName">{user?.name}</span>
+    </div>
+  );
 }
-
-export default Conversations;
