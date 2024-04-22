@@ -8,7 +8,6 @@ import SidebarOption from "./SidebarOption/SidebarOption";
 const Sidebar = () => {
     return (
         <div className="sidebar">
-            <img src="./TrekkersIcon.jpg" alt="" className="sidebar__trekkersIcon" />
             <Link to="/home" className="sidebar__link"><SidebarOption Icon={Home} text="Home" /></Link>
             <Link to="/Search" className="sidebar__link"><SidebarOption Icon={Search} text="Search" /></Link>
             <Link to="/notifications" className="sidebar__link"><SidebarOption Icon={NotificationsNone} text="Notifications" /></Link>

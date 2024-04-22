@@ -6,8 +6,9 @@ const mongoose = require("mongoose");
 
 const send_post = (async(req ,res ,next) => {
     try{
-        const {userId, countryId} = req.params;
-        const { title, post, photo } = req.body;
+        const {userId} = req.params;
+        const postPhoto = req.file?.filename;
+        const { country, title, post } = req.body;
         if(!post){
             const error = 'Content param not sent with request!';
             return next(error);
@@ -17,17 +18,25 @@ const send_post = (async(req ,res ,next) => {
             const error = 'User not found';
             return next(error);
         }
-        const country = await Country.findById(countryId);
-        if (!country) {
-            const error = 'Country not found';
-            return next(error);
+        let countryId;
+        let saved_country;
+        const existing_country = await Country.find({ postedBy: userId, country: country });
+        if (existing_country.length > 0) {
+            countryId = existing_country[0]._id;
+        }else{
+            const new_country = new Country({
+                postedBy: user._id,
+                country: country,
+            });
+            saved_country = await new_country.save();
+            countryId = saved_country._id;
         }
         const new_post = new Post({
             postedBy: user._id,
-            country: country._id,
+            country: countryId,
             title: title,
             content: post,
-            photo: photo,
+            postPhoto: postPhoto ? postPhoto : '',
         });
         await new_post.save();
         const data = {
@@ -35,10 +44,10 @@ const send_post = (async(req ,res ,next) => {
             firstName: user.firstName,
             lastName: user.lastName,
             avatar: user.profilePic,
-            country: country.country,
+            country: country ? country : saved_country.country,
             title: title, 
             content: post, 
-            photo: photo
+            postPhoto: postPhoto ? postPhoto : '',
         }
         res.status(201).json({status: 'SUCCESS', data: data});
     }catch(error){
@@ -67,6 +76,7 @@ const get_all_posts =  (async (req, res, next) => {
                 country: country.country,
                 title: post.title,
                 content: post.content,
+                postPhoto: post.postPhoto ? post.postPhoto : '',
                 createdAt: post.createdAt,
                 likes: post.likes,
                 comment: post.comments,
@@ -160,10 +170,37 @@ const toggle_like = (async(req ,res ,next) => {
     }
 });
 
+const timeline = (async(req ,res ,next) => {
+    try {
+        const currentUser = req.user;
+        const followingIds = currentUser.following.map(user => user._id);
+
+        const timeline_posts = await Post.find({ postedBy: { $in: followingIds } })
+                                        .populate('postedBy', 'firstName lastName username avatar')
+                                        .sort({ createdAt: -1 });
+        const formattedPosts = timeline_posts.map(post => ({
+            postId: post._id, 
+            handle: post.postedBy?.username || null, 
+            userId: post.postedBy?._id,
+            username: `${post.postedBy?.firstName || ''} ${post.postedBy?.lastName || ''}`, 
+            avatar: post.postedBy?.avatar || null, 
+            country: post.country?.country || null,
+            title: post.title, 
+            content: post.content, 
+            likes: post.likes, 
+            postPhoto: post.postPhoto || null
+        }));
+        res.status(201).json({status: 'SUCCESS', data: formattedPosts});
+    } catch (error) {
+        next(error);
+    }
+});
+
 module.exports = {
     send_post,
     get_all_posts,
     get_post,
     delete_post,
     toggle_like,
+    timeline
 };
