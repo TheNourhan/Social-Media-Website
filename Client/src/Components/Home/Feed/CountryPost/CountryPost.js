@@ -9,6 +9,7 @@ import getTokenConfig from '../../../../Utils/TokenUtils';
 import { Favorite, FavoriteBorderOutlined, LocationOnOutlined} from "@mui/icons-material";
 
 const CountryPost = ( {postData} ) => {
+    console.log("postData", postData)
     const { userId, countryId } = useParams();
     const currentUser = JSON.parse(localStorage.getItem('user'));
     const currentUserId = currentUser ? currentUser._id : null;
