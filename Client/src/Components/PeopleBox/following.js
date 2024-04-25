@@ -6,19 +6,13 @@ import './following.css';
 
 const Following = ({ user }) => {
     return (
-        <div className='main'>
-            <div>
+        <div className='following'>
             <Sidebar />
+            <div className='following__container'>
+                <PeopleBox {...user}/>
             </div>
-           
-            <PeopleBox {...user}/>
-          
-            <div>
-                <Widgets />
-            </div>
-            
+            <Widgets />
         </div>
-       
     );
 };
 
