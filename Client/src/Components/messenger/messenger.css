@@ -1,5 +1,4 @@
 .messenger {
-  height: calc(100vh - 70px);
   display: flex;
 }
 
@@ -9,14 +8,17 @@
 
 .chatMenuInput {
   width: 90%;
-  padding: 10px 0;
+  padding: 10px 15px;
   border: none;
   border-bottom: 1px solid gray;
   margin-bottom: 15px;
 }
 
 .chatBox {
-  flex: 5.5;
+    flex: 6.5;
+    width: 100%;
+    border-left: 1px solid var(--trekkers-secondary);
+    border-right: 1px solid var(--trekkers-secondary);
 }
 
 .chatBoxWrapper {
@@ -45,16 +47,24 @@
   width: 80%;
   height: 90px;
   padding: 10px;
+  margin-left: 1rem;
+  margin-top: 1rem;
+  border-radius: 10px;
 }
 
 .chatSubmitButton {
   width: 70px;
   height: 40px;
   border: none;
-  border-radius: 5px;
+  border-radius: 33px;
   cursor: pointer;
-  background-color: teal;
+  background-color: var(--trekkers-primary);
   color: white;
+  margin-right: 1rem;
+}
+
+.chatSubmitButton:hover{
+  background-color: var(--trekkers-primary-2);
 }
 
 .chatOnline {
@@ -71,9 +81,10 @@
 .noConversationText {
   position: absolute;
   top: 10%;
-  font-size: 35px;
+  font-size: 2rem;
   color: rgb(0, 0, 0);
   cursor: default;
+  padding-left: 2rem;
 }
 
 @media screen and (max-width: 768px) {

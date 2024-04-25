@@ -120,4 +120,15 @@
 .mail__icon{
     height: 25px;
     float: left;
+    color: var(--trekkers-primary);
+}
+
+.mail__icon-content{
+    margin-top: 0.7rem;
+}
+
+.btn_editProfile{
+    display: flex;
+    justify-content: space-between;
+    width: 10rem;
 }

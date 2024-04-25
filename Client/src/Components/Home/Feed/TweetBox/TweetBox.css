@@ -24,8 +24,10 @@
     height: 2.5rem;
     width: 100%;
     border-bottom: 1px solid var(--trekkers-secondary);
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     border-radius: 10px;
+    font-size: 1.2rem;
+    padding: 0% 10px;
 }
 
 .tweetbox__input-input::placeholder {
@@ -39,14 +41,14 @@
 .tweetbox__input-post{
     border: none;
     height: 5rem;
-    width: 90%;
+    width: 85%;
     border-bottom: 1px solid var(--trekkers-secondary);
-    margin-bottom: 1rem;
 }
 
 .tweetbox__icons{
     color: var(--trekkers-primary) !important;
     width: fit-content;
+    display: flex;
 }
 
 .tweetbox__icon{
@@ -58,9 +60,11 @@
     background-color: var(--trekkers-primary) !important;
     border-radius: 33px !important;
     color: var(--white) !important;
-    font-size: 0.9rem !important;
+    font-size: 1.1rem !important;
     text-transform: capitalize !important;
     border: none !important;
+    margin-right: 4.5rem !important;
+    padding: 0.5rem 2rem !important;
 }
 
 .tweetbox__btn:hover {
@@ -70,17 +74,8 @@
 .tweetbox__select-content{
     border: none;
     text-transform: capitalize ;
-    font-size: 0.9rem ;
     text-align: center;
-    border-radius: 33px;
-    background-color: var(--trekkers-primary);
-    color: var(--white);
-    cursor: pointer;
-    padding:  8px 30px;
-}
-
-.tweetbox__select-content:hover {
-    background-color: var(--trekkers-primary-2);
+    width: 15rem;
 }
 
 .tweetbox__select-option{

@@ -132,8 +132,8 @@ const EditProfileForm = () => {
                     placeholder=" Bio"
                     />
                 </div>
-                <div className='btn_editProfile-content-form'>
-                    <button type="submit">save</button>
+                <div>
+                    <button className='btn_editProfile-content-form' type="submit">save</button>
                 </div>
             </form>
         </div>

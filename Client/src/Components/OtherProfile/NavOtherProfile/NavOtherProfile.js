@@ -48,21 +48,25 @@ const NavOtherProfile = (userData) => {
 						<h2>{userData?.data?.name}</h2>
 						<span>@{userData?.data?.handle}</span>
 					</div>
-					<FontAwesomeIcon onClick={handelMailClick} className="mail__icon" icon={faEnvelope} />
-					<div className='btn_editProfile-content'>
-						{
-							followed 
-							? (
-								<span className="btn btn-primary" onClick={handleUnfollow}>
-									Unfollow
-								</span>
-							)
-							: (
-								<span className="btn btn-primary" onClick={handleFollow}>
-									Follow
-								</span>
-							)
-						}
+					<div className="btn_editProfile">
+						<div  className="mail__icon-content">
+							<FontAwesomeIcon onClick={handelMailClick} className="mail__icon" icon={faEnvelope} />
+						</div>
+						<div className='btn_editProfile-content'>
+							{
+								followed 
+								? (
+									<span className="btn-primary" onClick={handleUnfollow}>
+										Unfollow
+									</span>
+								)
+								: (
+									<span className="btn-primary" onClick={handleFollow}>
+										Follow
+									</span>
+								)
+							}
+						</div>
 					</div>
 				</div>
 				<div className="main__dataProfile">

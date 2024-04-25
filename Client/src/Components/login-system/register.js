@@ -38,7 +38,7 @@ const Register = () => {
       }
     }
     const handleSignInClick = () => {
-        navigate('/login');
+        navigate('/');
     };
     return (
       <div className="homepage">
@@ -51,7 +51,6 @@ const Register = () => {
             />
           </div>
           <div className="homepage__topRight">
-            <img className="logo" src="./images/logo.jpg" alt="logo" />
             <h1 className="homepage__topRight__Titel">Travel Now</h1>
             <h2 className="homepage__topRight__Subtitel">
               Join Trekkers today.
@@ -126,7 +125,6 @@ const Register = () => {
                     required
                     />
                 </div>
-                <br />
                 <div className="form-group">
                     <button type="submit" className="secondary__button">Sign Up</button>
                 </div>

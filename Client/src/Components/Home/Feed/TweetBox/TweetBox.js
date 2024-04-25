@@ -58,7 +58,7 @@ const TweetBox = () => {
                             className="tweetbox__input-input"
                             type="text"
                             name="title"
-                            placeholder=" What is your post title?"
+                            placeholder="What is your post title?"
                         />
                     </div>
                     <div className="tweetbox__input">
@@ -67,7 +67,7 @@ const TweetBox = () => {
                             type="text"
                             name="post"
                             onChange={handlePostChange}
-                            placeholder=" Where did you go?"
+                            placeholder="Where did you go?"
                         />
                     </div>
                     <div className="tweetbox__input">
@@ -83,10 +83,11 @@ const TweetBox = () => {
                             <label htmlFor="file">
                                 <ImageOutlined className="tweetbox__icon" />
                             </label>
-                            <CountrySelector 
-                                onSelectCountry={setSelectedCountry}
-                                className="tweetbox__select-content"
-                            />
+                            <div className="tweetbox__select-content">
+                                <CountrySelector 
+                                    onSelectCountry={setSelectedCountry}
+                                />
+                            </div>
                         </div>
                         <Button type="submit" className="tweetbox__btn">Post</Button>
                     </div>

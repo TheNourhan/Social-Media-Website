@@ -18,6 +18,7 @@ const PeopleBox = ({ user }) => {
 
     return (
         <div className="suggestFriend">
+            <div className="suggestdiv">
             <div className="suggestImgContainer">
                 <img className="suggestImg" src={'/uploads/' + avatar} alt="" />
             </div>
@@ -28,14 +29,15 @@ const PeopleBox = ({ user }) => {
                {/**  <span className="bio">{bio} </span> */}
 
             </div>
+            </div>
             {
 				followed 
 				? (
-					<button className="btn btn-primary" onClick={handleUnfollow}>
+					<button className="btn" onClick={handleUnfollow}>
 						Unfollow
 					</button>
 				    ) : (
-					<button className="btn btn-primary" onClick={handleFollow}>
+					<button className="btn" onClick={handleFollow}>
 						Follow
 					</button>
 				)

@@ -1,29 +1,10 @@
 .widgets {
-    flex: 0.3;
+    flex: 0.2;
     height: 100vh;
-    /*background-color: var(--twitter-secondary);*/
     position: sticky; 
     top: 0; 
-    overflow-y: auto; 
     max-height: 100vh; 
     
-}
-
-.widgets__container {
-    width: 100%;
-}
-
-.widgets button {
-    margin-left: auto;
-    cursor: pointer;
-    background-color: var(--trekkers-primary) !important;
-    color: var(--white) !important;
-    text-transform: capitalize !important;
-    border-radius: 33px !important;
-    width: 25%;
-    padding: 0.5rem 0 !important;
-    font-size: 1rem !important;
-    border: none !important;
 }
 
 .widgets button:hover {

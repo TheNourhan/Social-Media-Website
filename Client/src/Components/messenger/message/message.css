@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     margin-top: 20px;
+    margin-left: 20px;
 }
 .messageTop{
     display: flex;
@@ -18,9 +19,9 @@
 .messageText{
     padding: 10px;
     border-radius: 20px;
-    background-color:  rgb(68, 36, 195);
-   color: white;
-   max-width: 300px;
+    background-color:  var(--trekkers-primary);
+    color: white;
+    max-width: 300px;
 }
 
 .messageBottom{
@@ -33,6 +34,6 @@
 }
 
 .message.own .messageText{
-    background-color: rgb(205, 203, 203);
+    background-color: var(--trekkers-secondary);
     color: black;
 }
