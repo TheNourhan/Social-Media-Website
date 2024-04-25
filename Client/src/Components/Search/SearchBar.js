@@ -23,20 +23,19 @@ const SearchPage = () => {
     
     return (
         <div className="searchBar">
-          
             <Sidebar />
-         
-            <div className="container">
+            <div className="searchBar_container">
                 <h2>Search Page</h2>
                 <div className="search-form">
                     <input 
                         type="text" 
+                        className="search-form__input"
                         placeholder="search here.."
                         value={searchQuery}
                         onChange={(event) => setSearchQuery(event.target.value)}
                     />
                     <button 
-                        className="Select" 
+                        className="search-form__btn" 
                         style={{ fontSize: "16px", width: "120px" }} 
                         onClick={handleSearchAll} 
                         type="submit"
@@ -44,19 +43,19 @@ const SearchPage = () => {
                         search
                     </button>
                 </div>
-                
-                {searchResults.type === 'users' && (
-                    searchResults.data.map(user => (
-                        <PeopleBox key={user._id} user={user} />
-                    ))
-                )}
+                <div className="search__result">
+                    {searchResults.type === 'users' && (
+                        searchResults.data.map(user => (
+                            <PeopleBox key={user._id} user={user} />
+                        ))
+                    )}
 
-                {searchResults.type === 'posts' && (
-                    searchResults.data.map(post => (
-                        <PostsSearch key={post._id} postData={post} />
-                    ))
-                )}
-
+                    {searchResults.type === 'posts' && (
+                        searchResults.data.map(post => (
+                            <PostsSearch key={post._id} postData={post} />
+                        ))
+                    )}
+                </div>
             </div>
             
             <Widgets/>

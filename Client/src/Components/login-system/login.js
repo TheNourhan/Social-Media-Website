@@ -49,7 +49,6 @@ const Homepage = () => {
             />
           </div>
           <div className="homepage__topRight">
-            <img className="logo" src="./images/logo.jpg" alt="logo" />
             <h1 className="homepage__topRight__Titel">Travel Now</h1>
             <h2 className="homepage__topRight__Subtitel">
               Join Trekkers today.

@@ -20,7 +20,7 @@
   border-radius: 50%;
   object-fit: cover;
   margin-right: 20px;
-  border:1px solid black;
+  border:none;
 }
 
 .conversationName {

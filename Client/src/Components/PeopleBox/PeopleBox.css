@@ -5,15 +5,18 @@
     font-weight: 500;
     cursor: pointer;
     margin: 2px;
-    width: 75%;
     padding: 10px;
     border-radius: 10px;
-    margin-left: 60px;
-    margin-right: 60px;
-    margin-bottom: 3px;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    margin-bottom: 5px;
     box-shadow: 0 0 10px rgba(14, 7, 7, 0.1);
+    justify-content: space-between;
 }
 
+.suggestdiv{
+    display: flex;
+}
 .suggestFriend:hover {
     background-color: rgb(231, 231, 231);
 }
@@ -28,9 +31,9 @@
     height: 50px;
     border-radius: 50%;
     object-fit: cover;
-    border: 1px solid black;
+    border: none;
     margin-left: 0%;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
 .name .handel {
@@ -57,7 +60,6 @@
 
 .name {
     margin: 0;
-    margin-right: 40px;
     margin-left: 5px;
 
 }
@@ -80,14 +82,14 @@
 }
 
 .btn{
-    margin-left: 70px;
-     width: 150px;
-     cursor: pointer;
-     background-color: var(--trekkers-primary) !important;
-     color: var(--white) !important;
-     text-transform: capitalize !important;
-     border-radius: 33px !important; 
-     padding: 0.5rem 0 !important;
-     font-size: 1rem !important;
-     border: none !important;
+    margin-left: 2rem;
+    width: 7rem;
+    cursor: pointer;
+    background-color: var(--trekkers-primary) !important;
+    color: var(--white) !important;
+    text-transform: capitalize !important;
+    border-radius: 33px !important; 
+    padding: 0.5rem 0 !important;
+    font-size: 1.1rem !important;
+    border: none !important;
 }

@@ -1,63 +1,20 @@
+.postsearch_container {
+    padding: 1rem;
+    border: 1px solid var(--trekkers-secondary);
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: var(--trekkers-secondary);
+    margin-bottom: 20px;
+    margin-left: 2.2rem;
+    width: 28.5rem !important;
+    box-shadow: 0 0 10px rgba(14, 7, 7, 0.1);
+    align-items: center;
+}
+
 .people{
     display:flex;
     text-decoration: none;
     color: black;
-}
-.countryName1 label{
-        width: 90%; 
-        height: 30px; 
-        font-size: 16px; 
-        padding: 5px; 
-        margin-top: 10px;
-        text-align: center;
-        background-color: var(--trekkers-primary);
-        display:block;
-        margin-left: 5%;
-        border-radius: 10px ; 
-        
-}
-.title1 label{
-    width: 90%; 
-    height: 30px; 
-    font-size: 16px; 
-    padding: 4.5px; 
-    margin-top: 0.5rem;
-    text-align: center;
-    background-color: var(--grey);
-    display:block;
-    margin-left: 5%;
-    border-radius: 10px ; 
-
-}
-.gragh1 p{
-    text-align: center;
-  
-    margin: 20px;
-    text-justify: auto;
-    
-
-}
-
-.countryImg1{
-
-    width: 80%; 
-    height: 300px; 
-    margin-top: 10px;
-    margin-bottom: 0px;
-
-}
-
-.border{
-    box-shadow: 0 0 10px rgba(14, 7, 7, 0.1);
-    background-color: rgb(231, 231, 231);
-    border-radius: 10px;
-    margin: 1px;
-    width: 80%;
-    margin-left: 60px;
-    align-items: center;
-}
-.border:hover{
-    background-color:  white;
 }
 
 .peopleImg1{
@@ -67,21 +24,61 @@
     object-fit: cover;
     margin-right: 10px;
     margin-left: 20px;
-    border: 1px solid black;
- 
+    border: none;
 }
 
 .peopleName1{
     font-weight: 500;
-  
 }
 
 .peopleName1 .handel1{
     margin-left: 0%;
-    color: grey;
+    color: var(--grey-2);
     font-weight: 500;
     font-size: small;
     display: flex;
-    
 }
-      
+
+.countryName1 label{
+    width: 80%; 
+    height: 30px; 
+    font-size: 1.1rem;
+    font-weight: 400;
+    padding: 7px; 
+    margin-top: 20px;
+    text-align: center;
+    background-color: var(--trekkers-primary);
+    display:block;
+    margin-left: 12%;
+    border-radius: 10px ;
+}
+
+.title1 label{
+    width: 80%; 
+    height: 30px; 
+    font-size: 1.1rem; 
+    padding: 7px; 
+    margin-top: 0.5rem;
+    text-align: center;
+    background-color: var(--grey);
+    display:block;
+    margin-left: 12%;
+    border-radius: 10px ; 
+}
+
+.gragh1 p{
+    text-justify: auto;
+    font-size: 0.9rem;
+    padding: 0.5rem;
+    padding-top: 0rem;
+    margin-left: 12%;
+}
+
+.countryImg1{
+    margin-left: 12%;
+    padding: 7px;
+    width: 90%; 
+    height: 300px; 
+    max-height: 100%;
+    border-radius: 10px;
+}

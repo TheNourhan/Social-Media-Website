@@ -2,6 +2,60 @@
     display: flex;
 }
 
+.searchBar_container{
+    flex: 0.65;
+    width: 100%;
+    border-left: 1px solid var(--trekkers-secondary);
+    border-right: 1px solid var(--trekkers-secondary);
+}
+
+.searchBar_container h2{
+    padding: 1rem;
+    margin-left: 2rem;
+}
+
+.search-form{
+    margin-left: 6rem;
+}
+
+.search-form__input{
+    width: 58%;
+    border-top-left-radius: 33px;
+    border-bottom-left-radius: 33px;
+    padding:  10px 15px;
+    text-transform: capitalize ;
+    font-size: 1rem ;
+    border: none;
+    box-shadow: 0 0 20px rgba(14, 7, 7, 0.1);
+}
+
+.search-form__input:hover{
+    background-color: var(--trekkers-secondary);
+}
+
+.search-form__btn{
+    padding:  10px 15px;
+    border-top-right-radius: 33px;
+    border-bottom-right-radius: 33px;
+    cursor: pointer;
+    background-color: var(--trekkers-primary);
+    color: var(--white);
+    text-transform: capitalize ;
+    font-size: 1.1rem ;
+    border: none;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(14, 7, 7, 0.1);
+}
+
+.search-form__btn:hover{
+    background-color: var(--trekkers-primary-2)
+}
+
+.search__result{
+    padding: 2rem 4rem;
+}
+
+
 .countryName label{
         width: 90%; 
         height: 30px; 
@@ -37,18 +91,3 @@
     height: 300px; 
     margin-top: 30px;
 }
-.Select{
-    background-color: var(--trekkers-primary) ;
-}
- 
-
-.search-form{
-    width: 80%;
-   margin-left: 60px;
-   
-}
-
-.widgetsSearch{
-    
-}
-

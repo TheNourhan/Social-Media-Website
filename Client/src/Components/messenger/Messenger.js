@@ -126,7 +126,7 @@ const Messenger = () => {
                 <div className="chatBoxBottom">
                   <textarea
                     className="chatMessageInput"
-                    placeholder="write something..."
+                    placeholder="Write something..."
                     onChange={(e) => setNewMessage(e.target.value)}
                     value={newMessage}
                   ></textarea>
@@ -137,7 +137,7 @@ const Messenger = () => {
                   </>
                   ) : (
                   <span className="noConversationText">
-                     Open a conversation to start a chat.
+                     Choose a contact to start a conversation.
                   </span>
                )}  
             </div>
@@ -146,7 +146,7 @@ const Messenger = () => {
 
             <div className="chatMenu">
                <div className="chatMenuWrapper">
-                  <div className="chatMenuInput">your chat</div>
+                  <div className="chatMenuInput">your Friends</div>
                   {conversations.map((c) => (
                   <div className="userBox" onClick={() => setCurrentChat(c)}>
                      <Conversation conversation={c} currentUser={user} />

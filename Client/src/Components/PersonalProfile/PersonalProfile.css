@@ -3,14 +3,14 @@
 }
 
 .PersonalProfile__container{
-    flex: 0.5;
+    flex: 0.65;
     width: 100%;
     border-left: 1px solid var(--trekkers-secondary);
     border-right: 1px solid var(--trekkers-secondary);
 }
 
 .PersonalProfile__btn_addcountry__container{
-    padding: 10px;
+    padding: 10px 70px;
 }
 
 .btn_addcountry-content{
@@ -34,7 +34,7 @@
 }
 
 .PersonalProfile__country__container{
-    padding: 20px;
+    padding: 1rem 5rem;
 }
 
 

@@ -3,16 +3,18 @@
 }
 
 .uploader__container{
-    flex: 0.5;
+    flex: 0.65;
     width: 100%;
     border-left: 1px solid var(--trekkers-secondary);
     border-right: 1px solid var(--trekkers-secondary);
     padding-top: 3%;
     padding-bottom: 3%;
+    padding-right: 5rem;
 }
 
 .uploader__label-list{
     display: flex;
+    padding-bottom: 3rem;
 }
 
 .uplouder__label-content .react-select__option{
@@ -34,26 +36,18 @@
 }
 
 .uploader__select{
-    padding: 15px;
-    width: 100%;
+    padding: 2px 30px;
+    width: 18rem;
     border: none;
 }
 
 .uploader__select-content{
-    width: 85%;
     border: none;
     text-transform: capitalize ;
     font-size: 1.1rem ;
     text-align: center;
-    border: none;
-    padding:  10px 40px;
-    border-radius: 15px;
-    background-color: var(--white);
     cursor: pointer;
-    margin: 30px;
 }
-
-
 
 .uploader__select-option{
     border: none;
@@ -75,7 +69,8 @@
 
 .uploader__zone{
     height: 100%;
-    width: 70%;
+    width: 100%;
+    margin-left: 4rem;
 }
 
 .uploader__form{

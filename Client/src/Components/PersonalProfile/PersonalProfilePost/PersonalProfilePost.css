@@ -6,6 +6,8 @@
     cursor: pointer;
     background-color: var(--trekkers-secondary);
     margin-bottom: 20px;
+    width: 30rem !important;
+    box-shadow: 0 0 10px rgba(14, 7, 7, 0.1);
 }
 
 .post__content {

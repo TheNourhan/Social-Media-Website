@@ -3,9 +3,8 @@
 }
 
 .notifications__container{
-    flex: 0.5;
+    flex: 0.65;
     width: 100%;
     border-left: 1px solid var(--trekkers-secondary);
     border-right: 1px solid var(--trekkers-secondary);
-    height: 100vh;
 }

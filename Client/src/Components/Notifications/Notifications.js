@@ -21,7 +21,7 @@ const Notifications = () => {
       name: `${notification.sender.firstName} ${notification.sender.lastName}`,
       userId: `${notification.sender._id}`,
       post_title: notification.type === 'like' ? `:       ${notification.postTitle}` : null,
-      text_notification: notification.type === 'like' ? " liked your post  " : " Add you  ",
+      text_notification: notification.type === 'like' ? " Liked your post  " : " Added you  ",
       icon_notification: notification.type === 'like' ? <FavoriteOutlined /> : <PersonIcon />
     };
   });
