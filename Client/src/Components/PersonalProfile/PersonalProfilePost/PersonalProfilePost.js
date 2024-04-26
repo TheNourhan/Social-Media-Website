@@ -6,12 +6,14 @@ import getTokenConfig from '../../../Utils/TokenUtils';
 import CustomMenu from '../../OptionMenu/OptionMenu';
 
 const PersonalProfilePost = (country) => {
-    console.log("country",country?.country?.countryPhoto)
     const userId = country?.country?.postedBy;
     const countryId = country?.country?._id;
     const countryName = country?.country?.country;
     const countryPhoto = country?.country?.countryPhoto;
     const navigate = useNavigate();  
+
+    const currentUser = JSON.parse(localStorage.getItem("user"));
+    const currentUserId = currentUser._id;
 
     const handlePostClick = async() => {
         navigate(`/profile/${userId}/country/${countryId}`);
@@ -39,13 +41,14 @@ const PersonalProfilePost = (country) => {
                         <h3>{countryName}</h3>
                     </div>
                     
-                    <CustomMenu 
-                        items={[
-                            { label: "Delete item", onClick: handleDeleteItem },
-                            { label: "Update item", onClick: handleUpdateItme },
-                        ]}
-                    >
-                    </CustomMenu>   
+                    {userId === currentUserId && (
+                        <CustomMenu 
+                            items={[
+                                { label: "Delete item", onClick: handleDeleteItem },
+                                { label: "Update item", onClick: handleUpdateItme },
+                            ]}
+                        />
+                    )}
                 </div>
                 <div className="post__media" onClick={handlePostClick}>
                     <img src={'/uploads/' + countryPhoto} alt="" />

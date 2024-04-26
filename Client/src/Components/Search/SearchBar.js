@@ -12,6 +12,10 @@ const SearchPage = () => {
     const [searchResults, setSearchResults] = useState([]);
 
     const handleSearchAll = async () => {
+        if (!searchQuery.trim()) {
+            window.alert('Please enter a search query before searching.');
+            return;
+        }
         try{const config = getTokenConfig();
             if (!config) return;
             const response = await axios.post("http://localhost:3003/api/search/", { query: searchQuery }, config)

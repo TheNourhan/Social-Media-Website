@@ -1,5 +1,5 @@
 import { Avatar } from "@mui/material";
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import React from "react";
 import "./CountryPost.css";
 import axios from "axios";
@@ -9,10 +9,10 @@ import getTokenConfig from '../../../../Utils/TokenUtils';
 import { Favorite, FavoriteBorderOutlined, LocationOnOutlined} from "@mui/icons-material";
 
 const CountryPost = ( {postData} ) => {
-    console.log("postData", postData)
     const { userId, countryId } = useParams();
     const currentUser = JSON.parse(localStorage.getItem('user'));
     const currentUserId = currentUser ? currentUser._id : null;
+    const navigate = useNavigate();  
 
     if (!postData) {
         console.error("postData is undefined");
@@ -40,14 +40,20 @@ const CountryPost = ( {postData} ) => {
         }
     }
 
+    const handleClickeUser = () =>{
+        navigate(`/profile/${postData?.userId}`);
+    }
+
     return (
     <div className="post">
         <Avatar 
+            onClick={handleClickeUser}
             src={'/uploads/' + avatar}
-            className="post__avatar" />
+            className="post__avatar" 
+        />
         <div className="post__content">
             <div className="post__header">
-                <div className="post__names">
+                <div onClick={handleClickeUser} className="post__names">
                     <h3>{username}</h3>
                     <h4>@{handle}</h4>
                 </div>

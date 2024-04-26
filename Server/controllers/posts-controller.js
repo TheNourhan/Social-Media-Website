@@ -177,6 +177,7 @@ const timeline = (async(req ,res ,next) => {
 
         const timeline_posts = await Post.find({ postedBy: { $in: followingIds } })
                                         .populate('postedBy', 'firstName lastName username avatar')
+                                        .populate('country', 'country')
                                         .sort({ createdAt: -1 });
         const formattedPosts = timeline_posts.map(post => ({
             postId: post._id, 
@@ -190,6 +191,8 @@ const timeline = (async(req ,res ,next) => {
             likes: post.likes, 
             postPhoto: post.postPhoto || null
         }));
+        console.log("timeline", formattedPosts)
+
         res.status(201).json({status: 'SUCCESS', data: formattedPosts});
     } catch (error) {
         next(error);

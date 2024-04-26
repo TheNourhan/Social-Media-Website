@@ -10,15 +10,18 @@ import axios from "axios";
 import getTokenConfig from '../../../Utils/TokenUtils';
 
 const NavOtherProfile = (userData) => {
-	console.log('user data other', userData)
 	const { userId } = useParams();
   	const { followed, handleFollow, handleUnfollow } = useFollow(userId);
 	const navigate = useNavigate(); 
 	const user = JSON.parse(localStorage.getItem("user"));
 	const currentUserId = user._id;
 
-	const handleFollowingClick = () => {
-        navigate(`/profile/${userId}/following`);
+	const handleFollowingClick = (type) => {
+        if (type === 'following') {
+            navigate(`/profile/${userId}/following`);
+        } else if (type === 'followers') {
+            navigate(`/profile/${userId}/followers`);
+        }
     };
 
 	const handelMailClick = async() => {
@@ -76,11 +79,11 @@ const NavOtherProfile = (userData) => {
 						</div>
 					</div>
 					<div className='main__followBtns'>
-						<div onClick={handleFollowingClick}>
+						<div onClick={() => handleFollowingClick('following')}>
 							<span className='followBtn__number'>{userData?.data?.following}</span>
 							<span className='followBtn__text'>Following</span>
 						</div>
-						<div onClick={handleFollowingClick}>
+						<div onClick={() => handleFollowingClick('followers')}>
 							<span className='followBtn__number'>{userData?.data?.followers}</span>
 							<span className='followBtn__text'>Followers</span>
 						</div>

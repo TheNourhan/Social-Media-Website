@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./Sidebar.css";
 import { Link } from "react-router-dom";
 import { Home, MailOutline, NotificationsNone, PermIdentity, Search, Logout } from "@mui/icons-material";
@@ -7,7 +8,17 @@ import { Button } from "@mui/material";
 import SidebarOption from "./SidebarOption/SidebarOption";
 
 const Sidebar = () => {
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
+    const handleLogout = async () => {
+        try {
+            window.localStorage.removeItem("user");
+            window.localStorage.removeItem("token");
+            await axios.post(`http://localhost:3000/logout`);
+            navigate("/");
+        } catch (error) {
+            console.error("Logout failed:", error);
+        }
+    }; 
     const handleAddCountryClick = () => {
         navigate(`/add/country`);
     };
@@ -18,7 +29,7 @@ const Sidebar = () => {
             <Link to="/notifications" className="sidebar__link"><SidebarOption Icon={NotificationsNone} text="Notifications" /></Link>
             <Link to="/messenger" className="sidebar__link"><SidebarOption Icon={MailOutline} text="Messages" /></Link>
             <Link to="/profile" className="sidebar__link"><SidebarOption Icon={PermIdentity} text="Profile" /></Link>
-            <Link to="/logout" className="sidebar__link"><SidebarOption Icon={Logout} text="Logout" /></Link>
+            <Link to="/" onClick={handleLogout} className="sidebar__link"><SidebarOption Icon={Logout} text="Logout" /></Link>
 
             <Button className="sidebar__tweet-btn" onClick={handleAddCountryClick} variant="outlined" fullWidth>
                 Add country
