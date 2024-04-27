@@ -1,8 +1,8 @@
-.following{
+.connection{
     display: flex;
 }
 
-.following__container{
+.connection__container{
     flex: 0.65;
     width: 100%;
     border-left: 1px solid var(--trekkers-secondary);

@@ -1,7 +1,6 @@
 import React, { useState, useEffect} from "react";
 import "./Feed.css"
 import TweetBox from "./TweetBox/TweetBox";
-//import Post from "./Post/Post";
 import axios from "axios";
 import CountryPost from "./CountryPost/CountryPost";
 import getTokenConfig from '../../../Utils/TokenUtils';

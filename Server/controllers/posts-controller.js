@@ -177,6 +177,7 @@ const timeline = (async(req ,res ,next) => {
 
         const timeline_posts = await Post.find({ postedBy: { $in: followingIds } })
                                         .populate('postedBy', 'firstName lastName username avatar')
+                                        .populate('country', 'country')
                                         .sort({ createdAt: -1 });
         const formattedPosts = timeline_posts.map(post => ({
             postId: post._id, 
