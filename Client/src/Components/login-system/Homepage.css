@@ -47,6 +47,7 @@
 .input_form{
     width: 300px;
     border-radius: 5px;
+    padding: 10px;
 }
 .homepage__topRight__Buttons button{
     width: 19rem;
@@ -98,4 +99,8 @@
     color: var(--grey-2);
     text-decoration: none;
     margin-right: 1rem;
+}
+
+.valid-titel{
+    width: 21rem;
 }

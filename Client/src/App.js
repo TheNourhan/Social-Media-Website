@@ -11,6 +11,7 @@ import OtherProfile from './Components/OtherProfile/OtherProfile';
 import PostCountry from './Components/Post-Country/Post-Country';
 import Uploader from "./Components/Uploader/Uploader";
 import EditProfile from "./Components/EditProfile/EditProfile";
+import Validate from "./Components/login-system/Validate";
 import ConnectionList from './Components/connection/ConnectionList';
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
           <Route path="/profile/:userId/country/:countryId" element={<PostCountry />}></Route>
           <Route path="/add/country" element={<Uploader />}></Route>
           <Route path="/edit/country/:countryId" element={<Uploader />}></Route>
+          <Route path="/validate" element={<Validate />}></Route>
           <Route path="/profile/:userId/following" element={<ConnectionList />}></Route>
           <Route path="/profile/:userId/followers" element={<ConnectionList />}></Route>
         </Routes>
