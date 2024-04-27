@@ -191,8 +191,6 @@ const timeline = (async(req ,res ,next) => {
             likes: post.likes, 
             postPhoto: post.postPhoto || null
         }));
-        console.log("timeline", formattedPosts)
-
         res.status(201).json({status: 'SUCCESS', data: formattedPosts});
     } catch (error) {
         next(error);

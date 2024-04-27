@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from "axios";
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import './Uploader.css';
 import Sidebar from "../Sidebar/Sidebar";
 import Widgets from "../Home/Widgets/Widgets";
@@ -15,13 +15,21 @@ function Uploader() {
     const user = JSON.parse(localStorage.getItem("user"));
     const userId = user._id;
     const { countryId } = useParams();
+    const navigate = useNavigate();
 
-    const handleButtonClick = () => {
+    const handleUploadClick = () => {
+        if (!selectedCountry) {
+            alert('Please select a country.');
+            return;
+        }
         if(countryId){
             handleEditCountry();
         }else{
             handleAddCountry();
         } 
+    };
+    const handleCancelClick = () => {
+        navigate('/profile');
     };
 
     const handleFileChange = (event) => {
@@ -36,8 +44,7 @@ function Uploader() {
             formData.append("country", selectedCountry.label);
             formData.append("countryPhoto", selectedPhoto);
 
-            const response = await axios.patch(`http://localhost:3003/api/users/${userId}/countries/${countryId}`, formData, config);
-            console.log(response.data); 
+            await axios.patch(`http://localhost:3003/api/users/${userId}/countries/${countryId}`, formData, config);
         } catch (error) {
             console.error("Error:", error);
         }
@@ -51,8 +58,7 @@ function Uploader() {
             formData.append("country", selectedCountry.label);
             formData.append("countryPhoto", selectedPhoto);
 
-            const response = await axios.post(`http://localhost:3003/api/users/${userId}/countries`, formData, config);
-            console.log(response.data); 
+            await axios.post(`http://localhost:3003/api/users/${userId}/countries`, formData, config);
         } catch (error) {
             console.error("Error:", error);
         }
@@ -93,11 +99,11 @@ function Uploader() {
                 </div>
                 <div>
                     <div className='uplouder__Btn-content'>
-                        <div onClick={handleButtonClick} className='uploader__Btn'>
+                        <div onClick={handleUploadClick} className='uploader__Btn'>
                             <LuUploadCloud />
                             <span>Upload</span>
                         </div>
-                        <div className='uploader__Btn'>
+                        <div onClick={handleCancelClick} className='uploader__Btn'>
                             <ImCancelCircle />
                             <span>Cancel</span>
                         </div>
