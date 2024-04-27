@@ -1,0 +1,13 @@
+.connection{
+    display: flex;
+}
+
+.connection__container{
+    flex: 0.65;
+    width: 100%;
+    border-left: 1px solid var(--trekkers-secondary);
+    border-right: 1px solid var(--trekkers-secondary);
+    padding-top: 3%;
+    padding-bottom: 3%;
+    padding: 5rem;
+}

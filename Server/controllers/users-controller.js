@@ -109,8 +109,8 @@ const refresh_token = (async(req, res)=>{
 
 const logout = (async(req, res, next)=>{
     try {
-        res.clearCookie('refreshtoken', { path: '/refresh_token' })
-        return res.json({ msg: "Logout Successfully" })
+        res.clearCookie('refreshtoken', { path: '/refresh_token' });
+        return res.json({ msg: "Logout Successfully" });
 
     } catch (error) {
         return res.status(500).json({ msg: error.message })
@@ -324,7 +324,7 @@ const get_following = (async(req, res, next) => {
             const error = 'User not found';
             return next(error);
         }
-        const following = await User.find({ _id: { $in: user.following } }, '_id firstName lastName profilePic username');
+        const following = await User.find({ _id: { $in: user.following } }, '_id firstName lastName avatar username');
 
         res.status(200).json({ status: 'SUCCESS', data: following });
     } catch (error) {

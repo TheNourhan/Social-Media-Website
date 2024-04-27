@@ -30,6 +30,12 @@ const TweetBox = () => {
     
     const sendPosts = async (e) => {
         e.preventDefault();
+
+        if (!title.trim() || !post.trim() || !selectedCountry) {
+            window.alert('Please fill in all fields before posting.');
+            return;
+        }
+
         try {
             const config = getTokenConfigUploadImage();
             if (!config) return;

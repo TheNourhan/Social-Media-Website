@@ -19,7 +19,6 @@ const PostCountry = () => {
         	    if (!config) return;
                 const response = await axios.get(`http://localhost:3003/api/users/${userId}/countries/${countryId}/posts`, config);
                 setPostData(response.data.data);
-                console.log("response.data.data", response.data.data)
                         
             } catch (error) {
                 console.error("Error fetching posts:", error);
