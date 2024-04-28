@@ -8,6 +8,7 @@ import axios from "axios";
 import getTokenConfig from '../../Utils/TokenUtils';
 import PersonIcon from "@mui/icons-material/Person";
 import { FavoriteOutlined } from "@mui/icons-material";
+import host from '../../Utils/HostURL';
 
 const Notifications = () => {
   const [notifications, setNotifications] = useState([]);
@@ -31,7 +32,7 @@ const Notifications = () => {
       try {
         const config = getTokenConfig();
         if (!config) return;
-        const response = await axios.get(`http://localhost:3000/api/users/${currentUserId}/notifications`, config);
+        const response = await axios.get(`${host.URL}/api/users/${currentUserId}/notifications`, config);
         setNotifications(response.data.notifications);
       } catch (error) {
         console.error('Error fetching notifications:', error);

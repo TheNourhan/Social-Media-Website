@@ -6,6 +6,7 @@ import "./messenger.css";
 import getTokenConfig from '../../Utils/TokenUtils';
 import axios from "axios";
 import { io } from "socket.io-client";
+import host from '../../Utils/HostURL';
 
 const Messenger = () => {
    const [conversations, setConversations] = useState([]);
@@ -20,7 +21,7 @@ const Messenger = () => {
    const user = JSON.parse(localStorage.getItem("user"));
 
    useEffect(() => {
-      socket.current = io("ws://localhost:8900");
+      socket.current = io(host.socket);
       socket.current.on("getMessage", (data) => {
          setArrivalMessage({
          sender: data.senderId,
@@ -53,7 +54,7 @@ const Messenger = () => {
          try {
             const config = getTokenConfig();
             if (!config) return;
-            const res = await axios.get(`http://localhost:3003/api/conversations/${user._id}`, config);
+            const res = await axios.get(`${host.URL}/api/conversations/${user._id}`, config);
             setConversations(res.data);
          } catch (err) {
          console.log(err);
@@ -67,7 +68,7 @@ const Messenger = () => {
          try {
             const config = getTokenConfig();
             if (!config) return;
-            const res = await axios.get(`http://localhost:3003/api/messages/${currentChat?._id}` , config);
+            const res = await axios.get(`${host.URL}/api/messages/${currentChat?._id}` , config);
             setMessages(res.data);
          } catch (err) {
          console.log(err);
@@ -95,7 +96,7 @@ const Messenger = () => {
       try {
          const config = getTokenConfig();
          if (!config) return;
-         const res = await axios.post(`http://localhost:3003/api/messages/`, message, config);
+         const res = await axios.post(`${host.URL}/api/messages/`, message, config);
          setMessages([...messages, res.data]);
          setNewMessage("");
       } catch (err) {

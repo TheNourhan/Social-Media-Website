@@ -6,6 +6,7 @@ import axios from 'axios';
 import getTokenConfig from '../../Utils/TokenUtils';
 import PeopleBox from '../PeopleBox/PeopleBox';
 import PostsSearch from '../PostSearch/PostSearch';
+import host from '../../Utils/HostURL';
 
 const SearchPage = () => {
     const [searchQuery, setSearchQuery] = useState('');
@@ -18,7 +19,7 @@ const SearchPage = () => {
         }
         try{const config = getTokenConfig();
             if (!config) return;
-            const response = await axios.post("http://localhost:3003/api/search/", { query: searchQuery }, config)
+            const response = await axios.post(`${host.URL}/api/search/`, { query: searchQuery }, config)
             setSearchResults(response.data);
         }catch(error){
             console.error("Error:", error);

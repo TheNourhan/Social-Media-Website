@@ -4,6 +4,7 @@ import "./TweetBox.css";
 import axios from "axios";
 import CountrySelector from '../../../Uploader/CountrySelector';
 import getTokenConfigUploadImage from '../../../../Utils/TokenUtils-Upload-Image';
+import host from '../../../../Utils/HostURL';
 
 import {
     ImageOutlined,
@@ -46,7 +47,7 @@ const TweetBox = () => {
             formData.append('post', post);
             formData.append('country', selectedCountry.label);
 
-            const response = await axios.post(`http://localhost:3003/api/users/${userId}/posts`, formData, config);
+            const response = await axios.post(`${host.URL}/api/users/${userId}/posts`, formData, config);
             setPost(response.data.data);
         } catch (error) {
             console.error("Error fetching posts:", error);

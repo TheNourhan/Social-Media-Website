@@ -5,6 +5,7 @@ import "./CountryPost.css";
 import axios from "axios";
 import CustomMenu from '../../../OptionMenu/OptionMenu';
 import getTokenConfig from '../../../../Utils/TokenUtils';
+import host from '../../../../Utils/HostURL';
 
 import { Favorite, FavoriteBorderOutlined, LocationOnOutlined} from "@mui/icons-material";
 
@@ -12,7 +13,7 @@ const CountryPost = ( {postData} ) => {
     const { userId, countryId } = useParams();
     const currentUser = JSON.parse(localStorage.getItem('user'));
     const currentUserId = currentUser ? currentUser._id : null;
-    const navigate = useNavigate();  
+    const navigate = useNavigate();
 
     if (!postData) {
         console.error("postData is undefined");
@@ -25,7 +26,7 @@ const CountryPost = ( {postData} ) => {
         try {
             const config = getTokenConfig();
             if (!config) return;
-            await axios.post(`http://localhost:3000/api/users/${userId}/countries/${countryId}/posts/${postId}`, { current_user: currentUserId }, config);
+            await axios.post(`${host.URL}/api/users/${userId}/countries/${countryId}/posts/${postId}`, { current_user: currentUserId }, config);
         } catch (error) {
             console.error("Error toggling like:", error);
         }
@@ -34,7 +35,7 @@ const CountryPost = ( {postData} ) => {
         try {
             const config = getTokenConfig();
             if (!config) return;
-            await axios.delete(`http://localhost:3000/api/users/${userId}/countries/${countryId}/posts/${postId}`, config);    
+            await axios.delete(`${host.URL}/api/users/${userId}/countries/${countryId}/posts/${postId}`, config);    
         } catch (error) {
             console.error("Error deleting post:", error);
         }

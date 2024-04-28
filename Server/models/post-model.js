@@ -29,26 +29,6 @@ const PostSchema = new Schema({
       type: ObjectId,
       ref: 'User',
    }],
-   comments:[{
-      text: String, 
-      postedBy: { 
-         type: ObjectId,
-         ref: 'User',
-      },
-   }],
-   saved:[{
-      savedBy: {
-         type: ObjectId,
-         ref: 'User',
-      }, 
-      postId: {
-         type: ObjectId,
-         ref: 'Post',
-      },
-   }],
-   pinned: {
-      type: Boolean,
-   }
 },{ timestamps:true});
 
 var Post = mongoose.model('Post', PostSchema);

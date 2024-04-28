@@ -2,7 +2,7 @@ import React, { useState} from 'react';
 import Footer from './footer';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import host from '../../Utils/HostURL';
 import "./Homepage.css";
 
 const Register = () => {
@@ -18,7 +18,7 @@ const Register = () => {
     async function handleSubmit(e) {
       e.preventDefault();
       try {
-        const response = await axios.post("http://localhost:3003/register", {
+        const response = await axios.post(`${host.URL}/register`, {
           firstName: firstName,
           lastName: lastName,
           username: username,

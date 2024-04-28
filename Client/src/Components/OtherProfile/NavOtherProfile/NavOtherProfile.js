@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import axios from "axios";
 import getTokenConfig from '../../../Utils/TokenUtils';
+import host from '../../../Utils/HostURL';
 
 const NavOtherProfile = (userData) => {
 	const { userId } = useParams();
@@ -29,7 +30,7 @@ const NavOtherProfile = (userData) => {
 		try{
 			const config = getTokenConfig();
             if (!config) return;
-			await axios.post(`http://localhost:3003/api/conversations/`, { senderId: currentUserId, receiverId: userId }, config);
+			await axios.post(`${host.URL}/api/conversations/`, { senderId: currentUserId, receiverId: userId }, config);
 		}catch(error){
 			console.log('error', error);
 		}
