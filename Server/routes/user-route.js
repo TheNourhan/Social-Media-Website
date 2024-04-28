@@ -20,6 +20,9 @@ router.route('/login')
 router.route('/refresh_token')
         .post(users_controller.refresh_token)
 
+router.route('/verify')
+        .post(users_controller.verify_code)
+
 router.route('/logout')
         .post(users_controller.logout);
 

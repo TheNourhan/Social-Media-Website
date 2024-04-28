@@ -1,5 +1,5 @@
 import "./App.css";
-import {BrowserRouter, Route, Routes} from "react-router-dom"
+import {BrowserRouter, Route, Routes, Navigate} from "react-router-dom"
 import Homepage from "./Components/login-system/login";
 import Home from "./Components/Home/Home";
 import Register from "./Components/login-system/register";
@@ -15,25 +15,27 @@ import Validate from "./Components/login-system/Validate";
 import ConnectionList from './Components/connection/ConnectionList';
 
 function App() {
+  const currentUser = JSON.parse(localStorage.getItem('user'));
   return (
     <BrowserRouter>
       <div className="app">
         <Routes>
           <Route path="/" element={<Homepage />}></Route>
           <Route path="/register" element={<Register />}></Route>
-          <Route path="/home" element={<Home />}></Route>
-          <Route path="/Notifications" element={<Notifications />}></Route>
-          <Route path="/messenger" element={<Messenger />}></Route>
-          <Route path="/Search" element={<SearchBar />}></Route>
-          <Route path="/profile" element={<PersonalProfile />}></Route>
-          <Route path="/profile/edit" element={<EditProfile />}></Route>
-          <Route path="/profile/:userId" element={<OtherProfile />}></Route>
-          <Route path="/profile/:userId/country/:countryId" element={<PostCountry />}></Route>
-          <Route path="/add/country" element={<Uploader />}></Route>
-          <Route path="/edit/country/:countryId" element={<Uploader />}></Route>
           <Route path="/validate" element={<Validate />}></Route>
-          <Route path="/profile/:userId/following" element={<ConnectionList />}></Route>
-          <Route path="/profile/:userId/followers" element={<ConnectionList />}></Route>
+          {/* Routes requiring authentication */}
+          <Route path="/home" element={currentUser ? <Home /> : <Navigate to="/" />} />
+          <Route path="/Notifications" element={currentUser ? <Notifications /> : <Navigate to="/" />} />
+          <Route path="/messenger" element={currentUser ? <Messenger /> : <Navigate to="/" />} />
+          <Route path="/Search" element={currentUser ? <SearchBar /> : <Navigate to="/" />} />
+          <Route path="/profile" element={currentUser ? <PersonalProfile /> : <Navigate to="/" />} />
+          <Route path="/profile/edit" element={currentUser ? <EditProfile /> : <Navigate to="/" />} />
+          <Route path="/profile/:userId" element={currentUser ? <OtherProfile /> : <Navigate to="/" />} />
+          <Route path="/profile/:userId/country/:countryId" element={currentUser ? <PostCountry /> : <Navigate to="/" />} />
+          <Route path="/add/country" element={currentUser ? <Uploader /> : <Navigate to="/" />} />
+          <Route path="/edit/country/:countryId" element={currentUser ? <Uploader /> : <Navigate to="/" />} />
+          <Route path="/profile/:userId/following" element={currentUser ? <ConnectionList /> : <Navigate to="/" />} />
+          <Route path="/profile/:userId/followers" element={currentUser ? <ConnectionList /> : <Navigate to="/" />} />
         </Routes>
       </div>
     </BrowserRouter>

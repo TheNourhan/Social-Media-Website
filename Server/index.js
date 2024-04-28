@@ -1,10 +1,8 @@
 require('dotenv').config();
 const express = require('express');
 const app =express();
-const middleware =require('./middlewares/require-login');
 const bodyParser =require("body-parser");
 const database =require("./models/conn-db");
-const session = require("express-session");
 const path = require('path');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
@@ -22,12 +20,6 @@ const corsOption = {
    credential: true,
 };
 app.use(cors(corsOption));
-
-app.use(session({
-   secret:"bbq chips",
-   resave: true,
-   saveUninitialized:false
-}));
 
 //Routes
 const user_route =require('./routes/user-route');
@@ -51,15 +43,7 @@ app.use("/api/conversations/", conversation);
 const message = require('./routes/messages-route');
 app.use("/api/messages/", message);
 
-app.get("/", middleware.requireLogin, (req ,res ,next) => {
-   var payload = {
-     pageTitle :"Home",
-      userLoggedIn: req.session.user,
-   }
-   res.status(200).render("home",payload);
-});
-
-const server = app.listen(process.env.PORT || 3003,() => {
+app.listen(process.env.PORT || 3003,() => {
    console.log("server listening on port " + process.env.PORT || 3003);
 });
 

@@ -25,12 +25,10 @@ const Register = () => {
           email: email,
           password: password
         });
-        if (response.data === 'Register successful') {
-          navigate('/login');
-        } else if (response.data === 'email already in use') {
+        if (response.data.status === 'Register Successful') {
+          navigate('/validate');
+        } else if (response.data.error) {
           alert(response.data);
-        }else if( response.data === 'Username already in use'){
-            alert(response.data);
         }
       } catch (error) {
         alert("Wrong details");
