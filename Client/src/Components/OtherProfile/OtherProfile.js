@@ -7,6 +7,7 @@ import Widgets from "../Home/Widgets/Widgets";
 import NavOtherProfile from "./NavOtherProfile/NavOtherProfile";
 import PersonalProfilePost from "../PersonalProfile/PersonalProfilePost/PersonalProfilePost"
 import getTokenConfig from '../../Utils/TokenUtils';
+import host from '../../Utils/HostURL';
 
 const OtherProfile = () => {
     const [userData, setUserData] = useState(null);
@@ -18,7 +19,7 @@ const OtherProfile = () => {
             try {
                 const config = getTokenConfig();
         	    if (!config) return;
-                const response = await axios.get(`http://localhost:3003/api/users/${userId}`,config);
+                const response = await axios.get(`${host.URL}/api/users/${userId}`,config);
                 setUserData(response.data);          
             } catch (error) {
                 console.error("Error fetching posts:", error);
@@ -30,7 +31,7 @@ const OtherProfile = () => {
             try {
                 const config = getTokenConfig();
         	    if (!config) return;
-                const response = await axios.get(`http://localhost:3003/api/users/${userId}/countries`, config);
+                const response = await axios.get(`${host.URL}/api/users/${userId}/countries`, config);
                 setCountries(response.data.data);
             } catch (error) {
                 console.error("Error fetching countries data:", error);

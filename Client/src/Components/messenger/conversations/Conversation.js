@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import "./conversation.css";
 import getTokenConfig from '../../../Utils/TokenUtils';
+import host from '../../../Utils/HostURL';
 
 export default function Conversation({ conversation, currentUser }) {
   const [user, setUser] = useState(null);
@@ -13,7 +14,7 @@ export default function Conversation({ conversation, currentUser }) {
       try {
         const config = getTokenConfig();
         if (!config) return;
-        const res = await axios(`http://localhost:3003/api/users/${friendId}`, config);
+        const res = await axios(`${host.URL}/api/users/${friendId}`, config);
         setUser(res.data.data);
       } catch (err) {
         console.log(err);

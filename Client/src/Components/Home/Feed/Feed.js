@@ -4,6 +4,7 @@ import TweetBox from "./TweetBox/TweetBox";
 import axios from "axios";
 import CountryPost from "./CountryPost/CountryPost";
 import getTokenConfig from '../../../Utils/TokenUtils';
+import host from '../../../Utils/HostURL';
 
 const Feed = () => {
     const [posts, setPosts] = useState([]);
@@ -15,7 +16,7 @@ const Feed = () => {
             try {
                 const config = getTokenConfig();
                 if (!config) return;
-                const response = await axios.get(`http://localhost:3003/api/users/${currentUserId}/timeline`, config);
+                const response = await axios.get(`${host.URL}/api/users/${currentUserId}/timeline`, config);
                 setPosts(response.data.data);
             } catch (error) {
                 console.error("Error fetching posts:", error);

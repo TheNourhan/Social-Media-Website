@@ -8,6 +8,7 @@ import PersonalProfilePost from "./PersonalProfilePost/PersonalProfilePost"
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import getTokenConfig from '../../Utils/TokenUtils';
+import host from '../../Utils/HostURL';
 
 const PersonalProfile = () => {
     const [userData, setUserData] = useState(null);
@@ -25,7 +26,7 @@ const PersonalProfile = () => {
             try {
                 const config = getTokenConfig();
         	    if (!config) return;
-                const response = await axios.get(`http://localhost:3003/api/users/${userId}`, config);
+                const response = await axios.get(`${host.URL}/api/users/${userId}`, config);
                 setUserData(response.data);
                         
             } catch (error) {
@@ -38,7 +39,7 @@ const PersonalProfile = () => {
             try {
                 const config = getTokenConfig();
         	    if (!config) return;
-                const response = await axios.get(`http://localhost:3003/api/users/${userId}/countries`, config);
+                const response = await axios.get(`${host.URL}/api/users/${userId}/countries`, config);
                 setCountries(response.data.data);
             } catch (error) {
                 console.error("Error fetching countries data:", error);

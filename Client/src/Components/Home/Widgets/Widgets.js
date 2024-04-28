@@ -4,6 +4,7 @@ import "./Widgets.css";
 import PeopleBox from '../../PeopleBox/PeopleBox';
 import getTokenConfig from '../../../Utils/TokenUtils';
 import axios from "axios";
+import host from '../../../Utils/HostURL';
 
 
 const Widgets = () => {
@@ -14,7 +15,7 @@ const Widgets = () => {
             try {
                 const config = getTokenConfig();
                 if (!config) return;
-                const response = await axios.get(`http://localhost:3003/api/users`, config);
+                const response = await axios.get(`${host.URL}/api/users`, config);
                 setUsers(response.data.data);
             } catch (error) {
                 console.error("Error fetching posts:", error);

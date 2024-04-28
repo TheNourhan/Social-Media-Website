@@ -8,6 +8,7 @@ import { ImCancelCircle } from "react-icons/im";
 import { LuUploadCloud } from "react-icons/lu";
 import CountrySelector from './CountrySelector';
 import getTokenConfigUploadImage from '../../Utils/TokenUtils-Upload-Image';
+import host from '../../Utils/HostURL';
 
 function Uploader() {
     const [selectedCountry, setSelectedCountry] = useState('');
@@ -44,7 +45,7 @@ function Uploader() {
             formData.append("country", selectedCountry.label);
             formData.append("countryPhoto", selectedPhoto);
 
-            await axios.patch(`http://localhost:3003/api/users/${userId}/countries/${countryId}`, formData, config);
+            await axios.patch(`${host.URL}/api/users/${userId}/countries/${countryId}`, formData, config);
         } catch (error) {
             console.error("Error:", error);
         }
@@ -58,7 +59,7 @@ function Uploader() {
             formData.append("country", selectedCountry.label);
             formData.append("countryPhoto", selectedPhoto);
 
-            await axios.post(`http://localhost:3003/api/users/${userId}/countries`, formData, config);
+            await axios.post(`${host.URL}/api/users/${userId}/countries`, formData, config);
         } catch (error) {
             console.error("Error:", error);
         }

@@ -6,6 +6,7 @@ import Sidebar from '../Sidebar/Sidebar';
 import PeopleBox from '../PeopleBox/PeopleBox';
 import Widgets from '../Home/Widgets/Widgets';
 import './ConnectionList.css';
+import host from '../../Utils/HostURL';
 
 const ConnectionList = ({ user }) => {
     const [following, setFollowing] = useState([]);
@@ -18,7 +19,7 @@ const ConnectionList = ({ user }) => {
             try {
                 const config = getTokenConfig();
         	    if (!config) return;
-                const response = await axios.get(`http://localhost:3003/api/users/${userId}/${lastWord}`, config);
+                const response = await axios.get(`${host.URL}/api/users/${userId}/${lastWord}`, config);
                 setFollowing(response.data.data);
                 console.log("following", response.data.data);
             } catch (error) {

@@ -42,7 +42,6 @@ const search_users = async (query) => {
                 { username: { $regex: user_pattern } },
             ]
         }).select("_id firstName lastName username avatar bio");
-        console.log("users",users);
     
         return users;
     }catch(error){
@@ -83,7 +82,6 @@ const search_countries = async (query) => {
     try {
         const country_pattern = new RegExp("\\b" + query + "\\b", "i");
         const country = await Country.findOne({country: country_pattern});
-        console.log("country", country)
         if (!country) {
             console.log("Country not found")
         }else{

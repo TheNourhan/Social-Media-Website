@@ -4,6 +4,7 @@ import "./PersonalProfilePost.css";
 import { useNavigate } from "react-router-dom";
 import getTokenConfig from '../../../Utils/TokenUtils';
 import CustomMenu from '../../OptionMenu/OptionMenu';
+import host from '../../../Utils/HostURL';
 
 const PersonalProfilePost = (country) => {
     const userId = country?.country?.postedBy;
@@ -23,7 +24,7 @@ const PersonalProfilePost = (country) => {
         try{
             const config = getTokenConfig();
             if (!config) return;
-            await axios.delete(`http://localhost:3003/api/users/${userId}/countries/${countryId}`, config);
+            await axios.delete(`${host.URL}/api/users/${userId}/countries/${countryId}`, config);
         }catch(error){
             console.error("Error:", error);
         }

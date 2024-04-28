@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { Home, MailOutline, NotificationsNone, PermIdentity, Search, Logout } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import SidebarOption from "./SidebarOption/SidebarOption";
+import host from '../../Utils/HostURL';
 
 const Sidebar = () => {
     const navigate = useNavigate();
@@ -13,7 +14,7 @@ const Sidebar = () => {
         try {
             window.localStorage.removeItem("user");
             window.localStorage.removeItem("token");
-            await axios.post(`http://localhost:3000/logout`);
+            await axios.post(`${host.URL}/logout`);
             navigate("/");
         } catch (error) {
             console.error("Logout failed:", error);

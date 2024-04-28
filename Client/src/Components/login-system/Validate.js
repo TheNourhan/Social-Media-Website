@@ -3,6 +3,7 @@ import Footer from './footer';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import "./Homepage.css";
+import host from '../../Utils/HostURL';
 
 const Validate = () => {
   const navigate = useNavigate();
@@ -11,7 +12,7 @@ const Validate = () => {
   const handleSubmitClick = async(e) =>{
     e.preventDefault();
     try{
-      const response = await axios.post("http://localhost:3003/verify", {verificationCode: validationCode});
+      const response = await axios.post(`${host.URL}/verify`, {verificationCode: validationCode});
 
       if (response.data.status === 'Verification successful') {
         navigate('/');

@@ -3,6 +3,7 @@ import "./EditProfileForm.css";
 import axios from 'axios';
 import getTokenConfig from '../../../Utils/TokenUtils';
 import getTokenConfigUploadImage from '../../../Utils/TokenUtils-Upload-Image';
+import host from '../../../Utils/HostURL';
 
 const EditProfileForm = () => {
     const [firstName, setFirstName] = useState('');
@@ -18,7 +19,7 @@ const EditProfileForm = () => {
             try {
                 const config = getTokenConfig();
                 if (!config) return;
-                const response = await axios.get(`http://localhost:3003/api/users/${userId}/edit`, config);
+                const response = await axios.get(`${host.URL}/api/users/${userId}/edit`, config);
                 setFirstName(response.data.data.firstName)
                 setLastName(response.data.data.lastName)
                 setBio(response.data.data.bio)

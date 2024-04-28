@@ -2,6 +2,7 @@ import React, { useState} from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Footer from './footer';
+import host from '../../Utils/HostURL';
 
 import "./Homepage.css";
 
@@ -18,7 +19,7 @@ const Homepage = () => {
     async function handleSubmit(e) {
       e.preventDefault();
       try {
-        const response = await axios.post("http://localhost:3003/login", {
+        const response = await axios.post(`${host.URL}/login`, {
           logUsername: logUsername,
           logPassword: logPassword
         });

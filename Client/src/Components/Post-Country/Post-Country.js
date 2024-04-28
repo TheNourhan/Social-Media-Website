@@ -7,6 +7,7 @@ import Widgets from "../Home/Widgets/Widgets";
 import CountryPost from "../Home/Feed/CountryPost/CountryPost";
 import getTokenConfig from '../../Utils/TokenUtils';
 import axios from "axios";
+import host from '../../Utils/HostURL';
 
 const PostCountry = () => {
     const [postsData, setPostData] = useState([]);
@@ -17,7 +18,7 @@ const PostCountry = () => {
             try {
                 const config = getTokenConfig();
         	    if (!config) return;
-                const response = await axios.get(`http://localhost:3003/api/users/${userId}/countries/${countryId}/posts`, config);
+                const response = await axios.get(`${host.URL}/api/users/${userId}/countries/${countryId}/posts`, config);
                 setPostData(response.data.data);
                         
             } catch (error) {
