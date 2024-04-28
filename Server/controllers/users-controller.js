@@ -7,38 +7,69 @@ const mongoose = require("mongoose");
 const jwt = require('jsonwebtoken');
 const {create_access_token, create_refresh_token} = require('../middlewares/genrate-token');
 const delete_files = require('../utils/delete-files');
+const sendVerificationEmail = require('../utils/verification-email');
 
-const register = (async (req ,res ,next) => {
-    const {firstName, lastName, username, email, password} = req.body;
-    if(firstName && lastName && username && email && password){
-        const oldUser = await User.findOne({ 
-           $or:[
-               {username: username},
-               {email: email}
-           ]
-        });
-        if(oldUser){
-            const error = 'user already exists';
-            return next(error);
+const register = async (req, res, next) => {
+    const { firstName, lastName, username, email, password } = req.body;
+    if (!firstName || !lastName || !username || !email || !password) {
+        return res.status(400).json({ error: 'Missing required fields' });
+    }
+    let session;
+    try {
+        const existing_user = await User.findOne({ $or: [{ username }, { email }] });
+        if (existing_user) {
+            return res.status(409).json({ error: 'User already exists' });
         }
-        //user not found
-        const hashedPassword = await bcrypt.hash(password, 10);
-        const new_user = new User({
-            firstName: firstName,
-            lastName: lastName,
-            username: username,
-            email: email,
-            password: hashedPassword,
-        });
-        await new_user.save();
-        res.status(201).json({status: 'Register Successful', data: {user: new_user}}); 
+        const verification_code = Math.floor(100000 + Math.random() * 900000);
+        const hashed_password = await bcrypt.hash(password, 10);
 
-    }else{
-        const error_message ="make sure each field has a valid value.";
-        res.status(200).json({error_message: error_message});
-    }   
+        const new_user = new User({
+            firstName,
+            lastName,
+            username,
+            email,
+            password: hashed_password,
+            verificationCode: verification_code,
+            isVerified: false
+        });
+
+        session = await mongoose.startSession();
+        session.startTransaction();
+
+        await new_user.save({ session });
+        await sendVerificationEmail(email, verification_code);
+
+        await session.commitTransaction();
+        session.endSession();
+
+        res.status(201).json({ status: 'Register Successful', data: { user: new_user } });
+    } catch (error) {
+        if (session) {
+            await session.abortTransaction();
+            session.endSession();
+        }
+        console.error('Registration error:', error);
+        res.status(500).json({ error: 'Failed to register user' });
+    }
+};
+
+const verify_code = (async (req ,res ,next) => {
+    try {
+      const { verificationCode } = req.body;
+      const user = await User.findOne({ verificationCode: verificationCode });
+      if (!user) {
+        return res.status(404).json({ error: 'Invalid verification code' });
+      }
+      user.isVerified = true;
+      await user.save();
+  
+      res.status(200).json({ status: 'Verification successful', data: { user } });
+    } catch (error) {
+      console.error('Verification error:', error);
+      res.status(500).json({ error: 'Failed to verify code' });
+    }
 });
- 
+
 const login = (async(req ,res ,next) => {
     const {logUsername, logPassword} = req.body;
     if(!logUsername || !logPassword){
@@ -53,6 +84,10 @@ const login = (async(req ,res ,next) => {
     });
     if(!user){
         const error = 'This user does not exists';
+        return next(error);
+    }
+    if(!user.isVerified){
+        const error = 'Email has not been verified';
         return next(error);
     }
     const matched_password = await bcrypt.compare(logPassword, user.password);
@@ -71,7 +106,21 @@ const login = (async(req ,res ,next) => {
         path:'/refresh_token',
         maxAge : 30*24*60*60*1000 //30
     });
-    return res.status(200).json({ status: 'Login successful', data: {access_token: access_token, user: user}});
+    const user_without_password = {
+        _id: user._id,
+        __v: user.__v,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        username: user.username,
+        email: user.email,
+        avatar: user.avatar,
+        header: user.header,
+        followers: user.followers,
+        following: user.following,
+        bio: user.bio,
+    };
+    
+    return res.status(200).json({ status: 'Login successful', data: {access_token: access_token, user: user_without_password}});
 });
 
 const refresh_token = (async(req, res)=>{
@@ -416,6 +465,7 @@ function select_random_elements(array, num_lements) {
 
 module.exports = {
     register,
+    verify_code,
     login,
     refresh_token,
     logout,
