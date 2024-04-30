@@ -76,7 +76,7 @@ const NavOtherProfile = (userData) => {
 				<div className="main__dataProfile">
 					<div className='main__dataProfile-description'>
 						<div>
-							{userData?.data?.bio}
+							{userData?.data?.bio ? userData?.data?.bio : ' '}
 						</div>
 					</div>
 					<div className='main__followBtns'>

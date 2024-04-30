@@ -27,6 +27,7 @@ const send_post = (async(req ,res ,next) => {
             const new_country = new Country({
                 postedBy: user._id,
                 country: country,
+                countryPhoto: 'default/trekkers.jpg'
             });
             saved_country = await new_country.save();
             countryId = saved_country._id;
