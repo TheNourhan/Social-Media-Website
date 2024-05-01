@@ -21,6 +21,10 @@ const corsOption = {
 };
 app.use(cors(corsOption));
 
+app.get('/', (req, res) => {
+   res.send('Hello Server!')
+});
+
 //Routes
 const user_route =require('./routes/user-route');
 app.use("/", user_route);

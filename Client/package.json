@@ -1,9 +1,10 @@
 {
   "name": "frontend",
   "version": "0.1.0",
-  "proxy": "http://localhost:3003",
+  "proxy": "https://social-media-website-zn4o.onrender.com",
   "private": true,
   "dependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.0",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
@@ -23,7 +24,6 @@
     "react-select-country-list": "^2.2.3",
     "react-twitter-embed": "^4.0.4",
     "socket.io-client": "^4.7.5",
-    "timeago.js": "^4.0.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

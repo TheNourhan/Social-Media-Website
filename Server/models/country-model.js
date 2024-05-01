@@ -13,7 +13,7 @@ const CountrySchema = new Schema({
     },
     countryPhoto:{
         type: String,
-        default: '/default/trekkers.jpg'
+        default: 'default/trekkers.jpg'
     },
 },{ timestamps:true});
 
