@@ -27,7 +27,7 @@ const ConnectionList = ({ user }) => {
             }
         };
         fetchData();
-    }, [userId]);
+    }, [userId, lastWord]);
     return (
         <div className='connection'>
             <Sidebar />

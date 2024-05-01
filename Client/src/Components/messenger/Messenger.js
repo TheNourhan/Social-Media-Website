@@ -42,7 +42,7 @@ const Messenger = () => {
          );
       });
    }, [user, isUserAddedToSocket]);
-  
+   console.log(onlineUsers)
    useEffect(() => {
       arrivalMessage &&
          currentChat?.members.includes(arrivalMessage.sender) &&
