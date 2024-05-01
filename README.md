@@ -3,6 +3,9 @@
 ## Overview
 Trekkers is a social media site designed for travel enthusiasts to connect with new people and discover exciting destinations.
 
+## Deployment 
+. https://deploy-preview-48--trekkers-site.netlify.app/
+
 ## Watch the full project!
 
 ## Features
@@ -49,7 +52,5 @@ Trekkers is a social media site designed for travel enthusiasts to connect with 
 2. Express.js
 3. React.js
 5. MongoDB
-   
-## Usage
 
 ## Contributing
