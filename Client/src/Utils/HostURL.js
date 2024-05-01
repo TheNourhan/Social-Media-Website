@@ -1,5 +1,5 @@
 const host = {
-    URL: 'http://localhost:3003',
+    URL: 'https://social-media-website-zn4o.onrender.com',
     socket: 'ws://localhost:8900' 
 };
 
